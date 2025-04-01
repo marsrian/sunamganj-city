@@ -1,9 +1,18 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React, { useState, useRef } from "react";
-import ReactQuill from "react-quill-new";
+import dynamic from "next/dynamic";
 import "react-quill-new/dist/quill.snow.css";
 import toast from "react-hot-toast";
+
+// Dynamically import ReactQuill with SSR disabled
+const ReactQuill = dynamic(
+  () => import("react-quill-new").then((mod) => mod.default),
+  { 
+    ssr: false,
+    loading: () => <p>Loading editor...</p>
+  }
+);
 
 
 const ServiceForm = () => {
@@ -11,6 +20,7 @@ const ServiceForm = () => {
   const [imageUploading, setImageUploading] = useState(false);
   const [description, setDescription] = useState("");
   const router = useRouter();
+  const reactQuillRef = useRef(null);
 
   const uploadImageToImgBB = async (imageFile, isServiceImage = true) => {
     const formData = new FormData();
@@ -48,12 +58,12 @@ const ServiceForm = () => {
 
     input.onchange = async () => {
       const file = input.files[0];
-      if (file) {
+      if (file && reactQuillRef.current) {
         const url = await uploadImageToImgBB(file, false);
         if (url) {
           const quill = reactQuillRef.current.getEditor();
           const range = quill.getSelection();
-          quill.insertEmbed(range.index, "image", url);
+          quill.insertEmbed(range?.index || 0, "image", url);
         }
       }
     };
@@ -143,6 +153,7 @@ const ServiceForm = () => {
 
       <label className="text-[#444] font-semibold mt-6">Description</label>
       <ReactQuill
+        ref={reactQuillRef}
         theme="snow"
         value={description}
         onChange={setDescription}
