@@ -18,7 +18,7 @@ const ServicesInfo = async () => {
   const services = await getServicesData();
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
       {services.map((service) => (
         <div
           key={service._id}

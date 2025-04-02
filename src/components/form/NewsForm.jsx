@@ -8,14 +8,13 @@ import toast from "react-hot-toast";
 // Dynamically import ReactQuill with SSR disabled
 const ReactQuill = dynamic(
   () => import("react-quill-new").then((mod) => mod.default),
-  { 
+  {
     ssr: false,
-    loading: () => <p>Loading editor...</p>
+    loading: () => <p>Loading editor...</p>,
   }
 );
 
-
-const ServiceForm = () => {
+const NewsForm = () => {
   const [loading, setLoading] = useState(false);
   const [imageUploading, setImageUploading] = useState(false);
   const [description, setDescription] = useState("");
@@ -97,11 +96,15 @@ const ServiceForm = () => {
     "background"
   ];
 
-  const handleServiceSubmit = async (e) => {
+  const handleNewsSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     const form = e.target;
-    const service_name = form.service_name.value;
+    const news_title = form.news_title.value;
+    const start_date = form.start_date.value;
+    const end_date = form.end_date.value;
+    const location = form.location.value;
+    const event_status = form.event_status.value;
     const imageFile = form.image.files[0];
 
     let imageUrl = "";
@@ -114,14 +117,18 @@ const ServiceForm = () => {
     }
 
     const payload = {
-      service_name,
+      news_title,
+      start_date,
+      end_date,
+      location,
+      event_status,
       description,
       image: imageUrl,
     };
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/services`,
+        `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/news`,
         {
           method: "POST",
           headers: {
@@ -143,14 +150,50 @@ const ServiceForm = () => {
   };
 
   return (
-    <form onSubmit={handleServiceSubmit} className="flex flex-col mt-5">
-      <label htmlFor="service_name" className="text-[#444] font-semibold mt-6">
-        Service Name
+    <form onSubmit={handleNewsSubmit} className="flex flex-col mt-5">
+      <label htmlFor="news_title" className="text-[#444] font-semibold mt-6">
+        News Title
       </label>
       <input
         type="text"
-        name="service_name"
-        placeholder="Service Name"
+        name="news_title"
+        placeholder="News Title"
+        className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
+      />
+      <label htmlFor="start_date" className="text-[#444] font-semibold mt-6">
+        Start Date
+      </label>
+      <input
+        type="text"
+        name="start_date"
+        className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
+      />
+      <label htmlFor="end_date" className="text-[#444] font-semibold mt-6">
+        End Date
+      </label>
+      <input
+        type="text"
+        name="end_date"
+        className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
+      />
+
+      <label htmlFor="location" className="text-[#444] font-semibold mt-6">
+        News Location
+      </label>
+      <input
+        type="text"
+        name="location"
+        placeholder="News Location"
+        className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
+      />
+
+      <label htmlFor="event_status" className="text-[#444] font-semibold mt-6">
+        Event Status
+      </label>
+      <input
+        type="text"
+        name="event_status"
+        placeholder="Event status"
         className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
       />
 
@@ -167,12 +210,13 @@ const ServiceForm = () => {
       />
 
       <label htmlFor="image" className="text-[#444] font-semibold mt-16">
-        Service Image
+        News Image
       </label>
       <input
         type="file"
         name="image"
         accept="image/*"
+        required
         className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
       />
 
@@ -191,4 +235,4 @@ const ServiceForm = () => {
   );
 };
 
-export default ServiceForm;
+export default NewsForm;

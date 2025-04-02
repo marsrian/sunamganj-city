@@ -17,6 +17,12 @@ const DashboardPage = () => {
         >
           Services Info
         </Link>
+        <Link
+          href="/dashboard/news/add_news"
+          className="border p-2 border-gray-300 text-lg font-medium text-gray-900"
+        >
+          News
+        </Link>
       </div>
     </div>
   );
