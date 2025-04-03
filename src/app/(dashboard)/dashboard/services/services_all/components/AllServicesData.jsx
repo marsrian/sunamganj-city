@@ -1,17 +1,13 @@
-import React from "react";
 import Image from "next/image";
-// import MyBookingButton from "@/app/my-bookings/components/MyBookingButton";
 import Link from "next/link";
 
-const AllUserInfo = ({ data }) => {
+const AllServicesData = ({ data }) => {
   return (
-    <table className="w-full mt-12">
+    <table className="w-full mt-8">
       <thead className="border-b border-stone-200 bg-stone-100 text-sm font-medium text-stone-600">
         <tr>
           <th className="px-2.5 py-2 text-start font-medium">Image</th>
           <th className="px-2.5 py-2 text-start font-medium">Name</th>
-          <th className="px-2.5 py-2 text-start font-medium">Email</th>
-          <th className="px-2.5 py-2 text-start font-medium">Role</th>
           <th className="px-2.5 py-2 text-start font-medium">Action</th>
         </tr>
       </thead>
@@ -27,19 +23,16 @@ const AllUserInfo = ({ data }) => {
                 width={40}
                 height={40}
                 alt="service name"
-                className="rounded-full"
+                className="rounded-full w-10 h-10"
               />
             </td>
-            <td className="p-2">{item.name}</td>
-            <td className="p-2">{item.email}</td>
-            <td className="p-2">{item.role}</td>
-            <td className="p-2 flex space-x-2">
-              <Link href={`/dashboard/members/${item._id}`}>
+            <td className="p-2 dark:text-white">{item.service_name}</td>
+            <td className="p-2">
+              <Link href={`/dashboard/services/services_all/${item._id}`}>
                 <button className="text-xl text-white font-semibold rounded-md bg-[#FF3811] py-1 px-4 cursor-pointer">
                   Edit
                 </button>
               </Link>
-              {/* <MyBookingButton id={item._id} /> */}
             </td>
           </tr>
         ))}
@@ -48,4 +41,4 @@ const AllUserInfo = ({ data }) => {
   );
 };
 
-export default AllUserInfo;
+export default AllServicesData;

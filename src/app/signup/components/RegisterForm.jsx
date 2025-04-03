@@ -33,7 +33,7 @@ const RegisterForm = () => {
         type="text"
         name="name"
         placeholder="Your name"
-        className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
+        className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-2 px-4 mt-1"
       />
       <label htmlFor="email" className="text-[#444] font-semibold mt-6">
         Email
@@ -42,7 +42,7 @@ const RegisterForm = () => {
         type="email"
         name="email"
         placeholder="Email"
-        className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
+        className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-2 px-4 mt-1"
       />
       <label htmlFor="password" className="text-[#444] font-semibold mt-6">
         Password
@@ -51,7 +51,7 @@ const RegisterForm = () => {
         type="password"
         name="password"
         placeholder="Password"
-        className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
+        className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-2 px-4 mt-1"
       />
       <label
         htmlFor="confirmPassword"
@@ -63,12 +63,12 @@ const RegisterForm = () => {
         type="password"
         name="confirmPassword"
         placeholder="Confirm Password"
-        className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
+        className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-2 px-4 mt-1"
       />
       <button
         type="submit"
         disabled={loading}
-        className={`text-white text-lg font-semibold leading-7 rounded-[10px] py-4 mt-7 ${
+        className={`text-white text-lg font-semibold leading-7 rounded-[10px] py-3 mt-4 ${
           loading ? "bg-gray-500 cursor-not-allowed" : "bg-[#FF3811]"
         }`}
       >

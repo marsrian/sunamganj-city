@@ -22,9 +22,9 @@ const Navbar = () => {
   });
 
   return (
-    <div className="py-4 px-3 md:px-0">
+    <div className="px-3 md:px-0">
       <div className="bg-gray-900">
-        <div className="max-w-7xl mx-auto text-white py-4 flex justify-between">
+        <div className="max-w-7xl mx-auto text-white py-2 md:py-4 flex flex-col md:flex-row space-y-2 md:space-y-0 justify-between px-2 md:px-0">
           <h5>Welcome to Sunamganj City</h5>
           <div className="flex gap-5">
             <p>{formattedDate}</p>
@@ -40,11 +40,11 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <nav className="flex justify-between items-center border-b-gray-200 py-3 border-b ">
+      <nav className="flex justify-between items-center border-b-gray-200 py-3 border-b">
         <h3 className="text-2xl md:text-3xl font-bold text-green-800">
           Sunamganj City
         </h3>
-        <ul className="hidden md:flex justify-between space-x-8">
+        <ul className="hidden md:flex items-center justify-between space-x-8">
           <Link href="/">
             <li>Home</li>
           </Link>

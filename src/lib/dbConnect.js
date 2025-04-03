@@ -4,7 +4,7 @@ export const collectionNameObj = {
     usersCollection: "users",
     postsCollection: "posts",
     servicesCollection: "services",
-    newsCollection: "news"
+    eventsCollection: "events",
 }
 
 export default function dbConnect(collectionName) {

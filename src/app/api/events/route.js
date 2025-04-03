@@ -4,8 +4,8 @@ import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 export const GET = async (res) => {
-  const newsCollect = dbConnect(collectionNameObj.newsCollection);
-  const result = await newsCollect.find({}).toArray();
+  const eventCollect = dbConnect(collectionNameObj.eventsCollection);
+  const result = await eventCollect.find({}).toArray();
   return NextResponse.json(result);
 };
 
@@ -20,7 +20,7 @@ export const POST = async (req) => {
     );
   }
 
-  const newsCollect = dbConnect(collectionNameObj.newsCollection);
-  const result = await newsCollect.insertOne(body);
+  const eventCollect = dbConnect(collectionNameObj.eventsCollection);
+  const result = await eventCollect.insertOne(body);
   return NextResponse.json(result);
 };

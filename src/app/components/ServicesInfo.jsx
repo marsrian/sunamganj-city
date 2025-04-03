@@ -37,19 +37,14 @@ const ServicesInfo = async () => {
           )}
 
           <div className="flex justify-between items-center mb-2">
-            <h3 className="text-xl font-semibold">
-              {service.service_name}
-            </h3>
-            <button>
-              <Link href={`/services/${service._id}`} className="text-lg text-red-500 font-bold">→</Link>
-            </button>
+            <h3 className="text-xl font-semibold dark:text-black">{service.service_name}</h3>
+            <Link
+              href={`/services/${service._id}`}
+              className="text-lg text-red-800 font-bold underline"
+            >
+              Read More
+            </Link>
           </div>
-
-          {/* {service.description && (
-            <div className="prose prose-sm max-w-none text-gray-600">
-              <SanitizedContent html={service.description} />
-            </div>
-          )} */}
         </div>
       ))}
     </div>

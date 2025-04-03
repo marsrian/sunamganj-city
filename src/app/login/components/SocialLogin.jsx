@@ -19,11 +19,11 @@ const SocialLogin = () => {
   }, [session?.status]);
 
   return (
-    <div className="flex items-center justify-center gap-4">
+    <div className="flex items-center justify-center gap-4 mt-2">
       {/* facebooK: Github */}
       <button
         // onClick={() => handleSocialLogin("github")}
-        className="p-3 rounded-full bg-gray-100 mt-4"
+        className="p-3 rounded-full bg-gray-100"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +41,7 @@ const SocialLogin = () => {
       {/* Google: */}
       <button
         onClick={() => handleSocialLogin("google")}
-        className="p-3 rounded-full bg-gray-100 mt-4"
+        className="p-3 rounded-full bg-gray-100"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

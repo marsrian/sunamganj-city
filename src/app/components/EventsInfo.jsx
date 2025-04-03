@@ -4,7 +4,7 @@ import Link from "next/link";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
 const getEventsData = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/news`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/events`, {
     headers: new Headers(await headers()),
     next: { revalidate: 60 },
   });
@@ -25,7 +25,7 @@ const EventsInfo = async () => {
             <div className="mb-4 relative h-60 w-full">
               <Image
                 src={event.image}
-                alt={event.news_title}
+                alt={event.event_title}
                 fill
                 className="rounded-t-lg object-cover"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -43,8 +43,8 @@ const EventsInfo = async () => {
           )}
 
           <div className="mb-2 p-8">
-            <h3 className="text-2xl font-bold">{event.news_title}</h3>
-            <p className="flex items-center gap-3 mt-5">
+            <h3 className="text-2xl font-bold dark:text-black">{event.event_title}</h3>
+            <p className="flex items-center gap-3 mt-5 dark:text-black">
               <FaMapMarkerAlt className="text-red-800" /> {event.location}
             </p>
             <button className="mt-5">
@@ -56,12 +56,6 @@ const EventsInfo = async () => {
               </Link>
             </button>
           </div>
-
-          {/* {service.description && (
-            <div className="prose prose-sm max-w-none text-gray-600">
-              <SanitizedContent html={service.description} />
-            </div>
-          )} */}
         </div>
       ))}
     </div>

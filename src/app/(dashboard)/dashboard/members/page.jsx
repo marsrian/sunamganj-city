@@ -14,7 +14,7 @@ const DashboardPage = async () => {
   const data = await fetchUserInfo();
   return (
     <div>
-      <h1 className='text-2xl font-semibold text-center text-gray-900 my-8'>Users Info</h1>
+      <h1 className='text-2xl font-semibold text-center text-gray-900 dark:text-white mt-5'>Users Info</h1>
       <AllUserInfo data={data} />
     </div>
   )

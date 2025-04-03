@@ -14,10 +14,10 @@ const ReactQuill = dynamic(
   }
 );
 
-const NewsForm = () => {
+const SingleServiceUpdate = ({ data }) => {
   const [loading, setLoading] = useState(false);
   const [imageUploading, setImageUploading] = useState(false);
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(data?.description || "");
   const router = useRouter();
   const reactQuillRef = useRef(null);
 
@@ -79,7 +79,7 @@ const NewsForm = () => {
       ["clean"],
     ],
     clipboard: {
-      matchVisual: false, // Critical for Chrome 122+ compatibility
+      matchVisual: false,
     },
   };
 
@@ -93,21 +93,17 @@ const NewsForm = () => {
     "link",
     "image",
     "color",
-    "background"
+    "background",
   ];
 
-  const handleNewsSubmit = async (e) => {
+  const handleServiceUpdate = async (e) => {
     e.preventDefault();
     setLoading(true);
     const form = e.target;
-    const news_title = form.news_title.value;
-    const start_date = form.start_date.value;
-    const end_date = form.end_date.value;
-    const location = form.location.value;
-    const event_status = form.event_status.value;
+    const service_name = form.service_name.value;
     const imageFile = form.image.files[0];
 
-    let imageUrl = "";
+    let imageUrl = data?.image;
     if (imageFile) {
       imageUrl = await uploadImageToImgBB(imageFile);
       if (!imageUrl) {
@@ -117,23 +113,16 @@ const NewsForm = () => {
     }
 
     const payload = {
-      news_title,
-      start_date,
-      end_date,
-      location,
-      event_status,
-      description,
+      service_name: service_name || data.service_name,
+      description: description || data.description,
       image: imageUrl,
     };
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/news`,
+        `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/services/${data._id}`,
         {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          method: "PATCH",
           body: JSON.stringify(payload),
         }
       );
@@ -150,54 +139,19 @@ const NewsForm = () => {
   };
 
   return (
-    <form onSubmit={handleNewsSubmit} className="flex flex-col mt-5">
-      <label htmlFor="news_title" className="text-[#444] font-semibold mt-6">
-        News Title
+    <form onSubmit={handleServiceUpdate} className="flex flex-col mt-5">
+      <label htmlFor="service_name" className="text-[#444] dark:text-white font-semibold mt-6">
+        Service Name
       </label>
       <input
+        defaultValue={data.service_name}
         type="text"
-        name="news_title"
-        placeholder="News Title"
-        className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
-      />
-      <label htmlFor="start_date" className="text-[#444] font-semibold mt-6">
-        Start Date
-      </label>
-      <input
-        type="text"
-        name="start_date"
-        className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
-      />
-      <label htmlFor="end_date" className="text-[#444] font-semibold mt-6">
-        End Date
-      </label>
-      <input
-        type="text"
-        name="end_date"
+        name="service_name"
+        placeholder="Service Name"
         className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
       />
 
-      <label htmlFor="location" className="text-[#444] font-semibold mt-6">
-        News Location
-      </label>
-      <input
-        type="text"
-        name="location"
-        placeholder="News Location"
-        className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
-      />
-
-      <label htmlFor="event_status" className="text-[#444] font-semibold mt-6">
-        Event Status
-      </label>
-      <input
-        type="text"
-        name="event_status"
-        placeholder="Event status"
-        className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
-      />
-
-      <label className="text-[#444] font-semibold mt-6">Description</label>
+      <label className="text-[#444] dark:text-white font-semibold mt-6">Description</label>
       <ReactQuill
         ref={reactQuillRef}
         theme="snow"
@@ -209,14 +163,25 @@ const NewsForm = () => {
         style={{ height: "300px" }}
       />
 
-      <label htmlFor="image" className="text-[#444] font-semibold mt-16">
-        News Image
+      {/* image preview */}
+      {data?.image && (
+        <div className="mt-16">
+          <p>Current Image:</p>
+          <img
+            src={data.image}
+            alt="Service"
+            className="w-32 h-32 object-cover mt-1"
+          />
+        </div>
+      )}
+
+      <label htmlFor="image" className="text-[#444] dark:text-white font-semibold mt-5">
+        Service Image
       </label>
       <input
         type="file"
         name="image"
         accept="image/*"
-        required
         className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
       />
 
@@ -229,10 +194,10 @@ const NewsForm = () => {
             : "bg-[#FF3811]"
         }`}
       >
-        {loading || imageUploading ? "Submitting..." : "Submit"}
+        {loading || imageUploading ? "Updating..." : "Update"}
       </button>
     </form>
   );
 };
 
-export default NewsForm;
+export default SingleServiceUpdate;

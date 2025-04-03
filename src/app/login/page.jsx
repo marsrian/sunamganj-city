@@ -19,11 +19,11 @@ const LoginPage = () => {
           Login
         </h1>
         <LoginForm />
-        <p className="text-[#444] text-center text-lg font-medium mt-5">
+        <p className="text-[#444] text-center text-lg font-medium mt-4">
           Or Sign Up with
         </p>
         <SocialLogin />
-        <p className="text-[#737373] text-lg text-center mt-6">
+        <p className="text-[#737373] text-lg text-center mt-5">
         Don't have an account? <Link href="/signup" className="text-[#FF3811] font-semibold">Sign Up</Link>
         </p>
       </div>
