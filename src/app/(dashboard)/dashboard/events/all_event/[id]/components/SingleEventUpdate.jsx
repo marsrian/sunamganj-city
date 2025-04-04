@@ -137,7 +137,7 @@ const SingleEventUpdate = ({ data }) => {
       const serviceResponse = await res.json();
       toast.success("Services added successfully");
       form.reset();
-      router.push("/dashboard");
+      router.push("/dashboard/events/all_event");
     } catch (error) {
       toast.error("Failed to add services. Please try again.");
       console.error(error);

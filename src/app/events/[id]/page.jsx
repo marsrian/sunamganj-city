@@ -23,9 +23,9 @@ const SingleEventDetailsPage = async ({ params }) => {
       <h1 className="text-2xl md:text-4xl font-extrabold text-gray-900 dark:text-white">
         {eventDetails.event_title}
       </h1>
-      {eventDetails.event_status === "Event closed" ? (
-        <p className="bg-amber-200 flex items-center gap-2 py-3 px-5 rounded-sm mt-5">
-          <FaRegWindowClose className="text-amber-400" />
+      {eventDetails.event_status === "closed" ? (
+        <p className="bg-amber-200 flex items-center gap-2 py-3 px-5 rounded-sm mt-5 text-red-500">
+          <FaRegWindowClose className="text-red-400" />
           {eventDetails?.event_status}
         </p>
       ) : (

@@ -16,7 +16,7 @@ const EventsInfo = async () => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-      {events.map((event) => (
+      {events.filter((event) => event.approval === "approved").map((event) => (
         <div
           key={event._id}
           className="flex flex-col rounded-lg shadow-lg border bg-white hover:shadow-xl transition-shadow duration-300"
@@ -30,7 +30,7 @@ const EventsInfo = async () => {
                 className="rounded-t-lg object-cover"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
-              {event?.event_status === "Event closed" ? (
+              {event?.event_status === "closed" ? (
                 <p className="absolute right-4 top-4 text-white font-medium bg-red-500 p-2 rounded-full">
                   {event?.event_status}
                 </p>

@@ -80,7 +80,7 @@ const ServiceForm = () => {
       ["clean"],
     ],
     clipboard: {
-      matchVisual: false, // Critical for Chrome 122+ compatibility
+      matchVisual: false,
     },
   };
 
@@ -117,6 +117,7 @@ const ServiceForm = () => {
       service_name,
       description,
       image: imageUrl,
+      approval:"pending"
     };
 
     try {
@@ -133,7 +134,7 @@ const ServiceForm = () => {
       const serviceResponse = await res.json();
       toast.success("Services added successfully");
       form.reset();
-      router.push("/dashboard");
+      router.push("/dashboard/services/services_all");
     } catch (error) {
       toast.error("Failed to add services. Please try again.");
       console.error(error);

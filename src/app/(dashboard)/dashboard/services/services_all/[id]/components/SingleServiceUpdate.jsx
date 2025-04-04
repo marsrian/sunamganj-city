@@ -127,9 +127,9 @@ const SingleServiceUpdate = ({ data }) => {
         }
       );
       const serviceResponse = await res.json();
-      toast.success("Services added successfully");
+      toast.success("Services update successfully");
       form.reset();
-      router.push("/dashboard");
+      router.push("/dashboard/services/services_all");
     } catch (error) {
       toast.error("Failed to add services. Please try again.");
       console.error(error);

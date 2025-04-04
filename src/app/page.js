@@ -22,7 +22,7 @@ const HomePage = () => {
       {/* Events Section: */}
       <section className="mt-16 max-w-7xl mx-auto">
       <h1 className="text-center font-semibold text-xl md:text-3xl leading-[55px] underline underline-offset-8 decoration-double">
-      আপকামিং ইভেন্ট সমূহ
+      আসন্ন ইভেন্ট সমূহ
         </h1>
         <EventsInfo />
       </section>

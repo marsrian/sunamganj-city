@@ -1,7 +1,6 @@
 import { headers } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
-// import SanitizedContent from "./SanitizedContent";
 
 const getServicesData = async () => {
   const res = await fetch(
@@ -19,7 +18,7 @@ const ServicesInfo = async () => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-      {services.map((service) => (
+      {services.filter((service) => service.approval === "approved").map((service) => (
         <div
           key={service._id}
           className="flex flex-col rounded-lg shadow-lg p-4 border bg-white hover:shadow-xl transition-shadow duration-300"

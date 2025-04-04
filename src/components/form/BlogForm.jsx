@@ -4,6 +4,7 @@ import React, { useState, useRef } from "react";
 import dynamic from "next/dynamic";
 import "react-quill-new/dist/quill.snow.css";
 import toast from "react-hot-toast";
+import { useSession } from "next-auth/react";
 
 // Dynamically import ReactQuill with SSR disabled
 const ReactQuill = dynamic(
@@ -14,11 +15,15 @@ const ReactQuill = dynamic(
   }
 );
 
-const EventForm = () => {
+const BlogForm = () => {
   const [loading, setLoading] = useState(false);
   const [imageUploading, setImageUploading] = useState(false);
   const [description, setDescription] = useState("");
   const router = useRouter();
+  const { data: session } = useSession();
+  const user = session?.user;
+  console.log(user);
+
   const reactQuillRef = useRef(null);
 
   const uploadImageToImgBB = async (imageFile, isServiceImage = true) => {
@@ -93,18 +98,23 @@ const EventForm = () => {
     "link",
     "image",
     "color",
-    "background"
+    "background",
   ];
 
-  const handleEventSubmit = async (e) => {
+  const handleBlogSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    if (session?.user?.role !== "admin" && session?.user?.role !== "writer") {
+      toast.error(
+        "You are not authorized to add blog. Please contact admin."
+      );
+      setLoading(false);
+      return;
+    }
+
     const form = e.target;
-    const event_title = form.event_title.value;
-    const start_date = form.start_date.value;
-    const end_date = form.end_date.value;
-    const location = form.location.value;
-    const event_status = form.event_status.value;
+    const blog_title = form.blog_title.value;
     const imageFile = form.image.files[0];
 
     let imageUrl = "";
@@ -117,19 +127,18 @@ const EventForm = () => {
     }
 
     const payload = {
-      event_title,
-      start_date,
-      end_date,
-      location,
-      event_status,
+      blog_title,
       description,
       image: imageUrl,
-      approval: "pending"
+      writer_name: user.name,
+      writer_email: user.email,
+      writer_image: user.image,
+      approval: "pending",
     };
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/events`,
+        `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/blogs`,
         {
           method: "POST",
           headers: {
@@ -139,9 +148,9 @@ const EventForm = () => {
         }
       );
       const serviceResponse = await res.json();
-      toast.success("Services added successfully");
+      toast.success("Blog added successfully");
       form.reset();
-      router.push("/dashboard/events/all_event");
+      router.push("/dashboard/blogs/all_blog");
     } catch (error) {
       toast.error("Failed to add services. Please try again.");
       console.error(error);
@@ -151,54 +160,22 @@ const EventForm = () => {
   };
 
   return (
-    <form onSubmit={handleEventSubmit} className="flex flex-col mt-5">
-      <label htmlFor="event_title" className="text-[#444] dark:text-white font-semibold mt-6">
-        Event Title
+    <form onSubmit={handleBlogSubmit} className="flex flex-col mt-5">
+      <label
+        htmlFor="blog_title"
+        className="text-[#444] dark:text-white font-semibold mt-6"
+      >
+        Blog Title
       </label>
       <input
         type="text"
-        name="event_title"
-        placeholder="Event Title"
+        name="blog_title"
+        placeholder="Blog Title"
         className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
       />
-      <label htmlFor="start_date" className="text-[#444] dark:text-white font-semibold mt-6">
-        Start Date
+      <label className="text-[#444] dark:text-white font-semibold mt-6">
+        Description
       </label>
-      <input
-        type="text"
-        name="start_date"
-        className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
-      />
-      <label htmlFor="end_date" className="text-[#444] dark:text-white font-semibold mt-6">
-        End Date
-      </label>
-      <input
-        type="text"
-        name="end_date"
-        className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
-      />
-
-      <label htmlFor="location" className="text-[#444] dark:text-white font-semibold mt-6">
-        News Location
-      </label>
-      <input
-        type="text"
-        name="location"
-        placeholder="News Location"
-        className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
-      />
-
-      <label htmlFor="event_status" className="text-[#444] dark:text-white font-semibold mt-6">
-        Event Status
-      </label>
-      <input
-        type="text"
-        name="event_status"
-        placeholder="Event status"
-        className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
-      />
-
-      <label className="text-[#444] dark:text-white font-semibold mt-6">Description</label>
       <ReactQuill
         ref={reactQuillRef}
         theme="snow"
@@ -209,18 +186,18 @@ const EventForm = () => {
         className="mt-3"
         style={{ height: "300px" }}
       />
-
-      <label htmlFor="image" className="text-[#444] dark:text-white font-semibold mt-16">
-        News Image
+      <label
+        htmlFor="image"
+        className="text-[#444] dark:text-white font-semibold mt-16"
+      >
+        Service Image
       </label>
       <input
         type="file"
         name="image"
         accept="image/*"
-        required
         className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
       />
-
       <button
         type="submit"
         disabled={loading || imageUploading}
@@ -236,4 +213,4 @@ const EventForm = () => {
   );
 };
 
-export default EventForm;
+export default BlogForm;

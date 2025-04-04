@@ -36,8 +36,6 @@ export const PATCH = async (req, { params }) => {
       return NextResponse.json({ message: "Forbidden" }, { status: 403 });
     }
 
-    // const result = await userCollection.findOne(query);
-
     const body = await req.json();
     const filter = {
       $set: {

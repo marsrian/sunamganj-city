@@ -40,7 +40,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <nav className="flex justify-between items-center border-b-gray-200 py-3 border-b">
+      <nav className="flex justify-between items-center  py-3 border-b">
         <h3 className="text-2xl md:text-3xl font-bold text-green-800">
           Sunamganj City
         </h3>
@@ -48,13 +48,13 @@ const Navbar = () => {
           <Link href="/">
             <li>Home</li>
           </Link>
-          <Link href="/about">
-            <li>About</li>
+          <Link href="/blog">
+            <li>Blog</li>
           </Link>
           <Link href="/helpline">
             <li>Helpline</li>
           </Link>
-          <Link href="/dashboard">
+          <Link href="/dashboard/members">
             <li>Dashboard</li>
           </Link>
 
