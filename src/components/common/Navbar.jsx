@@ -5,6 +5,7 @@ import { FaAlignLeft, FaFacebookF, FaTimes } from "react-icons/fa";
 import { signOut, useSession } from "next-auth/react";
 import { ModeToggle } from "./ModeToggle";
 
+
 const Navbar = () => {
   const { data: session, status } = useSession();
   const [isOpen, setIsOpen] = useState(true);
@@ -21,11 +22,11 @@ const Navbar = () => {
   });
 
   return (
-    <div className="px-3 md:px-0">
-      <div className="bg-gray-900">
+    <div className="">
+      <div className="bg-gray-900 p-1 md:p-0">
         <div className="max-w-7xl mx-auto text-white py-2 md:py-4 flex flex-col md:flex-row space-y-2 md:space-y-0 justify-between px-2 md:px-0">
           <h5>Welcome to Sunamganj City</h5>
-          <div className="flex gap-5">
+          <div className="flex justify-between gap-5">
             <p>{formattedDate}</p>
             <button className="">
               <Link
@@ -39,7 +40,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <nav className="flex justify-between items-center  py-3 border-b">
+      <nav className="flex justify-between items-center px-3 md:px-8  py-3 border-b">
         <h3 className="text-2xl md:text-3xl font-bold text-green-800">
           Sunamganj City
         </h3>
@@ -63,8 +64,8 @@ const Navbar = () => {
             </Link>
           ) : (
             <Link href="/dashboard/events/all_event">
-            <li>Dashboard</li>
-          </Link>
+              <li>Dashboard</li>
+            </Link>
           )}
 
           {status == "authenticated" ? (
