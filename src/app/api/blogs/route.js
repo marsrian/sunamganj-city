@@ -13,7 +13,7 @@ export const POST = async (req) => {
   const session = await getServerSession(authOptions);
   const body = await req.json();
 
-  if (session?.user?.role !== "admin" && session?.user?.role !== "writer") {
+  if (session?.user?.role !== "writer") {
     return NextResponse.json({ message: "Forbidden" }, { status: 403 });
   }
   const blogCollect = dbConnect(collectionNameObj.blogsCollection);

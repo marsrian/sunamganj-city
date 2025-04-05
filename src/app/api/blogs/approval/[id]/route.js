@@ -4,20 +4,9 @@ import { NextResponse } from "next/server";
 import { authOptions } from "@/lib/authOptions";
 import { getServerSession } from "next-auth";
 
-export const GET = async (res, { params }) => {
-  const p = await params;
-  const query = { _id: new ObjectId(p.id) };
-  const blogCollect = dbConnect(collectionNameObj.blogsCollection);
-  const blog = await blogCollect.findOne(query);
-  if (!blog) {
-    return NextResponse.json({ message: "Blog not found" }, { status: 404 });
-  }
-  return NextResponse.json(blog);
-};
-
 export const PATCH = async (req, { params }) => {
   const session = await getServerSession(authOptions);
-  if (!session) {
+  if (session?.user?.role !== "admin") {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
 
@@ -25,14 +14,10 @@ export const PATCH = async (req, { params }) => {
     const { id } = params;
     const body = await req.json();
 
-    // Prevent updating writer_email even if included in the request
-    delete body.writer_email;
-
     const blogCollect = await dbConnect(collectionNameObj.blogsCollection);
     const result = await blogCollect.updateOne(
       { 
         _id: new ObjectId(id),
-        writer_email: session.user.email
       },
       { $set: body }
     );

@@ -4,6 +4,7 @@ import React, { useState, useRef } from "react";
 import dynamic from "next/dynamic";
 import "react-quill-new/dist/quill.snow.css";
 import toast from "react-hot-toast";
+import { useSession } from "next-auth/react";
 
 // Dynamically import ReactQuill with SSR disabled
 const ReactQuill = dynamic(
@@ -19,6 +20,7 @@ const SingleBlogUpdate = ({ data }) => {
   const [imageUploading, setImageUploading] = useState(false);
   const [description, setDescription] = useState(data?.description || "");
   const router = useRouter();
+  const { data: session } = useSession();
   const reactQuillRef = useRef(null);
 
   const uploadImageToImgBB = async (imageFile, isServiceImage = true) => {
@@ -99,6 +101,13 @@ const SingleBlogUpdate = ({ data }) => {
   const handleBlogUpdate = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    if (session?.user?.role !== "writer") {
+      toast.error("You are not authorized to add blog. Please contact admin.");
+      setLoading(false);
+      return;
+    }
+
     const form = e.target;
     const blog_title = form.blog_title.value;
     const imageFile = form.image.files[0];
@@ -143,7 +152,7 @@ const SingleBlogUpdate = ({ data }) => {
         htmlFor="blog_title"
         className="text-[#444] dark:text-white font-semibold mt-6"
       >
-        Service Name
+        Blog Title
       </label>
       <input
         defaultValue={data.blog_title}
@@ -183,7 +192,7 @@ const SingleBlogUpdate = ({ data }) => {
         htmlFor="image"
         className="text-[#444] dark:text-white font-semibold mt-5"
       >
-        Service Image
+        Blog Image
       </label>
       <input
         type="file"

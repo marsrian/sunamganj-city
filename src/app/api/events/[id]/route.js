@@ -17,23 +17,27 @@ export const GET = async (res, { params }) => {
 
 export const PATCH = async (req, { params }) => {
   const session = await getServerSession(authOptions);
-  // Check authentication
   if (!session) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
-  }
-  // Check admin role
-  if (session?.user?.role !== "admin") {
-    return NextResponse.json({ message: "Forbidden" }, { status: 403 });
   }
   try {
     const { id } = params;
     const body = await req.json();
-    
+
+    // Prevent updating manager_email even if included in the request
+    delete body.manager_email;
+
     const eventCollect = await dbConnect(collectionNameObj.eventsCollection);
     const result = await eventCollect.updateOne(
-      { _id: new ObjectId(id) },
+      { _id: new ObjectId(id), manager_email: session.user.email },
       { $set: body }
     );
+    if (result.matchedCount === 0) {
+      return NextResponse.json(
+        { message: "Forbidden - You are not the writer of this blog" },
+        { status: 403 }
+      );
+    }
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });

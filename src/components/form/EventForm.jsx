@@ -4,6 +4,7 @@ import React, { useState, useRef } from "react";
 import dynamic from "next/dynamic";
 import "react-quill-new/dist/quill.snow.css";
 import toast from "react-hot-toast";
+import { useSession } from "next-auth/react";
 
 // Dynamically import ReactQuill with SSR disabled
 const ReactQuill = dynamic(
@@ -19,6 +20,8 @@ const EventForm = () => {
   const [imageUploading, setImageUploading] = useState(false);
   const [description, setDescription] = useState("");
   const router = useRouter();
+  const { data: session } = useSession();
+  const user = session?.user;
   const reactQuillRef = useRef(null);
 
   const uploadImageToImgBB = async (imageFile, isServiceImage = true) => {
@@ -93,12 +96,19 @@ const EventForm = () => {
     "link",
     "image",
     "color",
-    "background"
+    "background",
   ];
 
   const handleEventSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    if (session?.user?.role !== "manager") {
+      toast.error("You are not authorized to add event. Please contact admin.");
+      setLoading(false);
+      return;
+    }
+
     const form = e.target;
     const event_title = form.event_title.value;
     const start_date = form.start_date.value;
@@ -124,7 +134,10 @@ const EventForm = () => {
       event_status,
       description,
       image: imageUrl,
-      approval: "pending"
+      manager_name: user?.name,
+      manager_email: user?.email,
+      manager_image: user?.image,
+      approval: "pending",
     };
 
     try {
@@ -152,7 +165,10 @@ const EventForm = () => {
 
   return (
     <form onSubmit={handleEventSubmit} className="flex flex-col mt-5">
-      <label htmlFor="event_title" className="text-[#444] dark:text-white font-semibold mt-6">
+      <label
+        htmlFor="event_title"
+        className="text-[#444] dark:text-white font-semibold mt-6"
+      >
         Event Title
       </label>
       <input
@@ -161,7 +177,10 @@ const EventForm = () => {
         placeholder="Event Title"
         className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
       />
-      <label htmlFor="start_date" className="text-[#444] dark:text-white font-semibold mt-6">
+      <label
+        htmlFor="start_date"
+        className="text-[#444] dark:text-white font-semibold mt-6"
+      >
         Start Date
       </label>
       <input
@@ -169,7 +188,10 @@ const EventForm = () => {
         name="start_date"
         className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
       />
-      <label htmlFor="end_date" className="text-[#444] dark:text-white font-semibold mt-6">
+      <label
+        htmlFor="end_date"
+        className="text-[#444] dark:text-white font-semibold mt-6"
+      >
         End Date
       </label>
       <input
@@ -178,7 +200,10 @@ const EventForm = () => {
         className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
       />
 
-      <label htmlFor="location" className="text-[#444] dark:text-white font-semibold mt-6">
+      <label
+        htmlFor="location"
+        className="text-[#444] dark:text-white font-semibold mt-6"
+      >
         News Location
       </label>
       <input
@@ -188,7 +213,10 @@ const EventForm = () => {
         className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
       />
 
-      <label htmlFor="event_status" className="text-[#444] dark:text-white font-semibold mt-6">
+      <label
+        htmlFor="event_status"
+        className="text-[#444] dark:text-white font-semibold mt-6"
+      >
         Event Status
       </label>
       <input
@@ -198,7 +226,9 @@ const EventForm = () => {
         className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
       />
 
-      <label className="text-[#444] dark:text-white font-semibold mt-6">Description</label>
+      <label className="text-[#444] dark:text-white font-semibold mt-6">
+        Description
+      </label>
       <ReactQuill
         ref={reactQuillRef}
         theme="snow"
@@ -210,7 +240,10 @@ const EventForm = () => {
         style={{ height: "300px" }}
       />
 
-      <label htmlFor="image" className="text-[#444] dark:text-white font-semibold mt-16">
+      <label
+        htmlFor="image"
+        className="text-[#444] dark:text-white font-semibold mt-16"
+      >
         News Image
       </label>
       <input

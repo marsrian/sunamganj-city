@@ -7,14 +7,13 @@ import { ModeToggle } from "./ModeToggle";
 
 const Navbar = () => {
   const { data: session, status } = useSession();
-  console.log("session", session);
   const [isOpen, setIsOpen] = useState(true);
   const handleTog1e = () => {
     setIsOpen(!isOpen);
   };
 
   // Today Date:
-  const formattedDate = new Date().toLocaleDateString("en-Us", {
+  const formattedDate = new Date().toLocaleDateString("bn-BD", {
     weekday: "long",
     year: "numeric",
     month: "long",
@@ -54,9 +53,19 @@ const Navbar = () => {
           <Link href="/helpline">
             <li>Helpline</li>
           </Link>
-          <Link href="/dashboard/members">
+          {session?.user?.role === "admin" ? (
+            <Link href="/dashboard/members">
+              <li>Dashboard</li>
+            </Link>
+          ) : session?.user?.role === "writer" ? (
+            <Link href="/dashboard/blogs/all_blog">
+              <li>Dashboard</li>
+            </Link>
+          ) : (
+            <Link href="/dashboard/events/all_event">
             <li>Dashboard</li>
           </Link>
+          )}
 
           {status == "authenticated" ? (
             <>

@@ -1,6 +1,8 @@
 import React from 'react'
 import { headers } from 'next/headers';
-import ShowAllService from './components/ShowAllService';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/authOptions';
+import ShowAllEvent from './components/ShowAllEvent';
 
 const fetchEventsInfo = async () =>{
   const res = await fetch(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/events`, {
@@ -12,10 +14,15 @@ const fetchEventsInfo = async () =>{
 
 const AllEventInfoPage = async () => {
   const data = await fetchEventsInfo();
+  const session = await getServerSession(authOptions);
+  
+    const filteredData = data.filter(event => 
+      event.manager_email === session?.user?.email
+    );
   return (
     <div>
       <h1 className='text-2xl font-semibold text-center text-gray-900 dark:text-white mt-5'>Services Info</h1>
-      <ShowAllService data={data} />
+      <ShowAllEvent data={filteredData} />
     </div>
   )
 }

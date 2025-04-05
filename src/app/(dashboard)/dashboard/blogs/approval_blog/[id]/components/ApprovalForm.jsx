@@ -8,7 +8,7 @@ const ApprovalForm = ({ blogDetails }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`/api/blogs/${blogDetails._id}`, {
+      const res = await fetch(`/api/blogs/approval/${blogDetails._id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

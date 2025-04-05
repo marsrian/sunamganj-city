@@ -1,6 +1,6 @@
 import React from "react";
 import { headers } from "next/headers";
-import SingleBlogUpdate from "./components/page";
+import SingleBlogUpdate from "./components/SingleBlogUpdate";
 
 const UpdateBlogPage = async ({ params }) => {
   const p = await params;

@@ -4,6 +4,7 @@ import React, { useState, useRef } from "react";
 import dynamic from "next/dynamic";
 import "react-quill-new/dist/quill.snow.css";
 import toast from "react-hot-toast";
+import { useSession } from "next-auth/react";
 
 // Dynamically import ReactQuill with SSR disabled
 const ReactQuill = dynamic(
@@ -19,6 +20,7 @@ const SingleEventUpdate = ({ data }) => {
   const [imageUploading, setImageUploading] = useState(false);
   const [description, setDescription] = useState(data?.description || "");
   const router = useRouter();
+  const { data: session } = useSession();
   const reactQuillRef = useRef(null);
 
   const uploadImageToImgBB = async (imageFile, isServiceImage = true) => {
@@ -96,9 +98,16 @@ const SingleEventUpdate = ({ data }) => {
     "background",
   ];
 
-  const handleServiceUpdate = async (e) => {
+  const handleEventUpdate = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    if (session?.user?.role !== "manager") {
+      toast.error("You are not authorized to add event. Please contact admin.");
+      setLoading(false);
+      return;
+    }
+
     const form = e.target;
     const event_title = form.event_title.value;
     const start_date = form.start_date.value;
@@ -134,8 +143,8 @@ const SingleEventUpdate = ({ data }) => {
           body: JSON.stringify(payload),
         }
       );
-      const serviceResponse = await res.json();
-      toast.success("Services added successfully");
+      const eventResponse = await res.json();
+      toast.success("Event update successfully");
       form.reset();
       router.push("/dashboard/events/all_event");
     } catch (error) {
@@ -146,7 +155,7 @@ const SingleEventUpdate = ({ data }) => {
     }
   };
   return (
-    <form onSubmit={handleServiceUpdate} className="flex flex-col mt-5">
+    <form onSubmit={handleEventUpdate} className="flex flex-col mt-5">
       <label
         htmlFor="event_title"
         className="text-[#444] dark:text-white font-semibold mt-6"
@@ -189,7 +198,7 @@ const SingleEventUpdate = ({ data }) => {
         htmlFor="location"
         className="text-[#444] dark:text-white font-semibold mt-6"
       >
-        News Location
+        Event Location
       </label>
       <input
         defaultValue={data.location}
@@ -240,7 +249,7 @@ const SingleEventUpdate = ({ data }) => {
       )}
 
       <label htmlFor="image" className="text-[#444] font-semibold">
-        Service Image
+        Event Image
       </label>
       <input
         type="file"

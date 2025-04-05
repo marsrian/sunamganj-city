@@ -105,7 +105,7 @@ const BlogForm = () => {
     e.preventDefault();
     setLoading(true);
 
-    if (session?.user?.role !== "admin" && session?.user?.role !== "writer") {
+    if (session?.user?.role !== "writer") {
       toast.error(
         "You are not authorized to add blog. Please contact admin."
       );

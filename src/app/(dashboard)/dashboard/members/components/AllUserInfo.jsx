@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-// import MyBookingButton from "@/app/my-bookings/components/MyBookingButton";
 import Link from "next/link";
 
 const AllUserInfo = ({ data }) => {

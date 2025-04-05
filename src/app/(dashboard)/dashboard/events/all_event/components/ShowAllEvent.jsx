@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const ShowAllService = ({ data }) => {
+const ShowAllEvent = ({ data }) => {
   return (
     <table className="w-full mt-8">
       <thead className="border-b border-stone-200 bg-stone-100 text-sm font-medium text-stone-600">
@@ -41,4 +41,4 @@ const ShowAllService = ({ data }) => {
   )
 }
 
-export default ShowAllService
+export default ShowAllEvent

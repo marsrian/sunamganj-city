@@ -1,14 +1,21 @@
 "use client";
+import { useSession } from "next-auth/react";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const ApprovalEventForm = ({ eventDetails }) => {
   const [approval, setApproval] = useState(eventDetails?.approval);
   const [message, setMessage] = useState(null);
+  const { data: session } = useSession();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (session?.user?.role !== "admin") {
+      toast.error("You are not admin.");
+      return;
+    }
     try {
-      const res = await fetch(`/api/events/${eventDetails._id}`, {
+      const res = await fetch(`/api/events/approval/${eventDetails._id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -16,9 +23,9 @@ const ApprovalEventForm = ({ eventDetails }) => {
         credentials: "include",
         body: JSON.stringify({ approval }),
       });
-      
+
       const data = await res.json();
-      
+
       if (res.ok) {
         setMessage("Status updated successfully!");
       } else {
@@ -36,9 +43,15 @@ const ApprovalEventForm = ({ eventDetails }) => {
         onChange={(e) => setApproval(e.target.value)}
         className="p-2 border rounded"
       >
-        <option value="pending" className="dark:text-black">Pending</option>
-        <option value="approved" className="dark:text-black">Approved</option>
-        <option value="rejected" className="dark:text-black">Rejected</option>
+        <option value="pending" className="dark:text-black">
+          Pending
+        </option>
+        <option value="approved" className="dark:text-black">
+          Approved
+        </option>
+        <option value="rejected" className="dark:text-black">
+          Rejected
+        </option>
       </select>
       <button
         type="submit"
