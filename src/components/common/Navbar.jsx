@@ -129,7 +129,7 @@ const Navbar = () => {
                       width={24}
                       height={24}
                       alt="Profile"
-                      className="rounded-full"
+                      className="w-6 h-6 rounded-full"
                     />
                   ): (
                     <Image
@@ -137,7 +137,7 @@ const Navbar = () => {
                       width={24}
                       height={24}
                       alt="Profile"
-                      className="rounded-full"
+                      className="w-6 h-6 rounded-full"
                     />
                   )}
                   <SelectValue placeholder={session.user.name} />
@@ -174,7 +174,7 @@ const Navbar = () => {
                       width={24}
                       height={24}
                       alt="Profile"
-                      className="rounded-full"
+                      className="w-6 h-6 rounded-full"
                     />
                   ) : (
                     <Image
@@ -182,7 +182,7 @@ const Navbar = () => {
                       width={24}
                       height={24}
                       alt="Profile"
-                      className="rounded-full"
+                      className="w-6 h-6 rounded-full"
                     />
                   )}
                 </div>

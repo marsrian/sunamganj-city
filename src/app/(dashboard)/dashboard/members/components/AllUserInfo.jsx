@@ -26,7 +26,7 @@ const AllUserInfo = ({ data }) => {
                 width={40}
                 height={40}
                 alt="service name"
-                className="rounded-full"
+                className="w-10 h-10 rounded-full"
               />
             </td>
             <td className="p-2 dark:text-white">{item.name}</td>

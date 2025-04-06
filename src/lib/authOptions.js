@@ -60,18 +60,30 @@ export const authOptions = {
         } else {
           // If user exists, update their role in the token/session
           user.role = isExist.role;
+          user.name = isExist.name;
+          user.image = isExist.image;
         }
       }
       return true;
     },
     async jwt({ token, user }) {
+      const userCollection = await dbConnect(collectionNameObj.usersCollection);
+      const dbUser = await userCollection.findOne({ email: token.email });
       if (user) {
         token.role = user.role;
+      }
+      if (dbUser) {
+        token.name = dbUser.name;
+        token.image = dbUser.image;
+        token.role = dbUser.role;
       }
       return token;
     },
     async session({ session, token }) {
       session.user.role = token.role;
+      session.user.name = token.name; // ✅ add this
+      session.user.image = token.image; // ✅ add this
+      session.user.email = token.email; // optional
       return session;
     },
   },
