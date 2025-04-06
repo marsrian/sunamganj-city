@@ -83,7 +83,7 @@ const Header = () => {
           </div>
         </CarouselItem>
         <CarouselItem>
-          <div className="w-full h-[300px] md:h-[600px] bg-[url('/assets/Haor_bilash.jpg')] bg-cover bg-center">
+          <div className="w-full h-[300px] md:h-[600px] bg-[url('/assets/haor_bilash.jpg')] bg-cover bg-center">
             <div className="flex flex-col justify-center items-center h-full bg-black/50">
               <h1 className="text-2xl md:text-5xl text-white text-center font-extrabold md:leading-[55px]">
               হাওর বিলাস
