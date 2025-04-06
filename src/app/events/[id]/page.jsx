@@ -35,7 +35,7 @@ const SingleEventDetailsPage = async ({ params }) => {
         </p>
       )}
       {eventDetails?.start_date && (
-        <p className="flex items-center gap-2 text-gray-600 dark:text-white mt-5">
+        <p className="flex md:items-center gap-2 text-gray-600 dark:text-white mt-5">
           <FaCalendarAlt className="text-gray-600" />
             ইভেন্টের সময়কাল: {eventDetails.start_date} থেকে{" "}
             {eventDetails.end_date}
@@ -47,7 +47,7 @@ const SingleEventDetailsPage = async ({ params }) => {
           alt={eventDetails.event_title}
           width={500}
           height={300}
-          className="w-full h-[400px] mt-6"
+          className="w-full h-60 md:h-[400px] mt-6"
           sizes=""
         />
       )}

@@ -6,7 +6,7 @@ import SocialLogin from "../login/components/SocialLogin";
 
 const SignUpPage = () => {
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center gap-16 mt-6">
+    <div className="flex flex-col md:flex-row items-center justify-center gap-16 mt-6 px-2 md:px-0">
       <Image
         src="/assets/niladri.webp"
         width={500}

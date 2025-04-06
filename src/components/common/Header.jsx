@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <Carousel
       plugins={[plugin.current]}
-      className="w-full"
+      className="w-full relative"
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >
@@ -95,8 +95,8 @@ const Header = () => {
           </div>
         </CarouselItem>
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPrevious className="absolute left-4 md:left-16" />
+      <CarouselNext className="absolute right-4 md:right-16" />
     </Carousel>
   );
 };

@@ -28,7 +28,7 @@ const page = async ({ params }) => {
           alt={serviceDetails.service_name}
           width={500}
           height={300}
-          className="w-full h-[400px] mt-5"
+          className="w-full h-[250px] md:h-[400px] mt-5"
           sizes=""
         />
       )}

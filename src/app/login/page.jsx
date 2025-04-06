@@ -1,12 +1,12 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
-import LoginForm from './components/LoginForm'
-import SocialLogin from './components/SocialLogin'
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
+import LoginForm from "./components/LoginForm";
+import SocialLogin from "./components/SocialLogin";
 
 const LoginPage = () => {
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center gap-16 mt-6">
+    <div className="flex flex-col md:flex-row items-center justify-center gap-16 mt-6 px-2 md:px-0">
       <Image
         src="/assets/niladri.webp"
         width={500}
@@ -24,11 +24,14 @@ const LoginPage = () => {
         </p>
         <SocialLogin />
         <p className="text-[#737373] text-lg text-center mt-5">
-        Don't have an account? <Link href="/signup" className="text-[#FF3811] font-semibold">Sign Up</Link>
+          Don't have an account?{" "}
+          <Link href="/signup" className="text-[#FF3811] font-semibold">
+            Sign Up
+          </Link>
         </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;

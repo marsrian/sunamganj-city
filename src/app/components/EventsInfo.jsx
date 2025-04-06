@@ -22,7 +22,7 @@ const EventsInfo = async () => {
           className="flex flex-col rounded-lg shadow-lg border bg-white hover:shadow-xl transition-shadow duration-300"
         >
           {event?.image && (
-            <div className="mb-4 relative h-60 w-full">
+            <div className="relative h-60 w-full">
               <Image
                 src={event.image}
                 alt={event.event_title}
@@ -42,12 +42,12 @@ const EventsInfo = async () => {
             </div>
           )}
 
-          <div className="mb-2 p-8">
+          <div className="mb-2 p-4 md:p-8">
             <h3 className="text-2xl font-bold dark:text-black">{event.event_title}</h3>
-            <p className="flex items-center gap-3 mt-5 dark:text-black">
+            <p className="flex items-center gap-3 mt-4 dark:text-black">
               <FaMapMarkerAlt className="text-red-800" /> {event.location}
             </p>
-            <button className="mt-5">
+            <button className="mt-4">
               <Link
                 href={`/events/${event._id}`}
                 className="text-lg text-red-800 font-bold underline"

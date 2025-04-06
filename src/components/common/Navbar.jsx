@@ -4,13 +4,32 @@ import React, { useState } from "react";
 import { FaAlignLeft, FaFacebookF, FaTimes } from "react-icons/fa";
 import { signOut, useSession } from "next-auth/react";
 import { ModeToggle } from "./ModeToggle";
-
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { usePathname, useRouter } from "next/navigation";
+import Image from "next/image";
 
 const Navbar = () => {
   const { data: session, status } = useSession();
   const [isOpen, setIsOpen] = useState(true);
-  const handleTog1e = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const handleToggle = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleSelect = (value) => {
+    if (value === "profile") {
+      router.push("/profile");
+    } else if (value === "logout") {
+      signOut();
+    }
   };
 
   // Today Date:
@@ -26,7 +45,7 @@ const Navbar = () => {
       <div className="bg-gray-900 p-1 md:p-0">
         <div className="max-w-7xl mx-auto text-white py-2 md:py-4 flex flex-col md:flex-row space-y-2 md:space-y-0 justify-between px-2 md:px-0">
           <h5>Welcome to Sunamganj City</h5>
-          <div className="flex justify-between gap-5">
+          <div className="flex justify-between gap-2 md:gap-5">
             <p>{formattedDate}</p>
             <button className="">
               <Link
@@ -45,54 +64,234 @@ const Navbar = () => {
           Sunamganj City
         </h3>
         <ul className="hidden md:flex items-center justify-between space-x-8">
-          <Link href="/">
+          <Link
+            href="/"
+            className={pathname === "/" ? "text-green-600 font-medium" : ""}
+          >
             <li>Home</li>
           </Link>
-          <Link href="/blog">
+          <Link
+            href="/blog"
+            className={pathname === "/blog" ? "text-green-600 font-medium" : ""}
+          >
             <li>Blog</li>
           </Link>
-          <Link href="/helpline">
+          <Link
+            href="/helpline"
+            className={
+              pathname === "/helpline" ? "text-green-600 font-medium" : ""
+            }
+          >
             <li>Helpline</li>
           </Link>
           {session?.user?.role === "admin" ? (
-            <Link href="/dashboard/members">
+            <Link
+              href="/dashboard/members"
+              className={
+                pathname.includes("/dashboard")
+                  ? "text-green-600 font-medium"
+                  : ""
+              }
+            >
               <li>Dashboard</li>
             </Link>
           ) : session?.user?.role === "writer" ? (
-            <Link href="/dashboard/blogs/all_blog">
+            <Link
+              href="/dashboard/blogs/all_blog"
+              className={
+                pathname.includes("/dashboard")
+                  ? "text-green-600 font-medium"
+                  : ""
+              }
+            >
               <li>Dashboard</li>
             </Link>
           ) : (
-            <Link href="/dashboard/events/all_event">
+            <Link
+              href="/dashboard/events/all_event"
+              className={
+                pathname.includes("/dashboard")
+                  ? "text-green-600 font-medium"
+                  : ""
+              }
+            >
               <li>Dashboard</li>
             </Link>
           )}
 
           {status == "authenticated" ? (
-            <>
-              <li>{session?.user?.name}</li>
-              <li>
-                <button onClick={() => signOut()}>Logout</button>
-              </li>
-            </>
+            <Select onValueChange={handleSelect}>
+              <SelectTrigger className="w-[180px] gap-2">
+                <div className="flex items-center gap-2">
+                  {session?.user?.image ? (
+                    <Image
+                      src={session.user.image}
+                      width={24}
+                      height={24}
+                      alt="Profile"
+                      className="rounded-full"
+                    />
+                  ): (
+                    <Image
+                      src="/assets/profile.png"
+                      width={24}
+                      height={24}
+                      alt="Profile"
+                      className="rounded-full"
+                    />
+                  )}
+                  <SelectValue placeholder={session.user.name} />
+                </div>
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="profile">Profile</SelectItem>
+                  <SelectItem value="logout">Logout</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           ) : (
-            <Link href="/login">
+            <Link
+              href="/login"
+              className={
+                pathname === "/login" ? "text-green-600 font-medium" : ""
+              }
+            >
               <li>Login</li>
             </Link>
           )}
 
           <ModeToggle />
         </ul>
-        <div className="md:hidden">
-          {isOpen ? (
-            <button onClick={handleTog1e}>
-              <FaAlignLeft className="text-xl" />
-            </button>
-          ) : (
-            <button onClick={handleTog1e}>
-              <FaTimes className="text-xl" />
-            </button>
+        <div className="flex gap-2 md:hidden">
+          {status == "authenticated" && (
+            <Select onValueChange={handleSelect}>
+              <SelectTrigger className="w-20 gap-2">
+                <div className="flex items-center gap-2">
+                  {session?.user?.image ? (
+                    <Image
+                      src={session.user.image}
+                      width={24}
+                      height={24}
+                      alt="Profile"
+                      className="rounded-full"
+                    />
+                  ) : (
+                    <Image
+                      src="/assets/profile.png"
+                      width={24}
+                      height={24}
+                      alt="Profile"
+                      className="rounded-full"
+                    />
+                  )}
+                </div>
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="profile">Profile</SelectItem>
+                  <SelectItem value="logout">Logout</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           )}
+          <ModeToggle />
+          <button
+            onClick={handleToggle}
+            className={`${!isOpen ? "hidden" : "block"}`}
+          >
+            <FaAlignLeft className="text-xl" />
+          </button>
+
+          <div
+            className={`absolute top-20 left-0 w-80 h-screen bg-gray-900 text-white bg-opacity-80 z-10 transition-all duration-300 ease-in-out ${
+              isOpen
+                ? "-translate-x-full opacity-0"
+                : "translate-x-0 opacity-100"
+            }`}
+          >
+            <div className="relative">
+              <ul className="flex flex-col items-center gap-8 mt-10">
+                <ul className="flex flex-col items-center gap-8 mt-10">
+                  <Link
+                    href="/"
+                    className={
+                      pathname === "/" ? "text-green-600 font-medium" : ""
+                    }
+                  >
+                    <li>Home</li>
+                  </Link>
+                  <Link
+                    href="/blog"
+                    className={
+                      pathname === "/blog" ? "text-green-600 font-medium" : ""
+                    }
+                  >
+                    <li>Blog</li>
+                  </Link>
+                  <Link
+                    href="/helpline"
+                    className={
+                      pathname === "/helpline"
+                        ? "text-green-600 font-medium"
+                        : ""
+                    }
+                  >
+                    <li>Helpline</li>
+                  </Link>
+                  {session?.user?.role === "admin" ? (
+                    <Link
+                      href="/dashboard/members"
+                      className={
+                        pathname.includes("/dashboard")
+                          ? "text-green-600 font-medium"
+                          : ""
+                      }
+                    >
+                      <li>Dashboard</li>
+                    </Link>
+                  ) : session?.user?.role === "writer" ? (
+                    <Link
+                      href="/dashboard/blogs/all_blog"
+                      className={
+                        pathname.includes("/dashboard")
+                          ? "text-green-600 font-medium"
+                          : ""
+                      }
+                    >
+                      <li>Dashboard</li>
+                    </Link>
+                  ) : (
+                    <Link
+                      href="/dashboard/events/all_event"
+                      className={
+                        pathname.includes("/dashboard")
+                          ? "text-green-600 font-medium"
+                          : ""
+                      }
+                    >
+                      <li>Dashboard</li>
+                    </Link>
+                  )}
+                  {status == "unauthenticated" && (
+                    <Link
+                      href="/login"
+                      className={
+                        pathname === "/login"
+                          ? "text-green-600 font-medium"
+                          : ""
+                      }
+                    >
+                      <li>Login</li>
+                    </Link>
+                  )}
+                </ul>
+              </ul>
+              <button onClick={handleToggle} className="absolute top-4 right-4">
+                <FaTimes className="text-xl" />
+              </button>
+            </div>
+          </div>
         </div>
       </nav>
     </div>

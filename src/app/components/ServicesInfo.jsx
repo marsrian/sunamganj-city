@@ -35,7 +35,7 @@ const ServicesInfo = async () => {
             </div>
           )}
 
-          <div className="flex justify-between items-center mb-2">
+          <div className="flex flex-col gap-2 mb-2">
             <h3 className="text-xl font-semibold dark:text-black">{service.service_name}</h3>
             <Link
               href={`/services/${service._id}`}
