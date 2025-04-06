@@ -28,7 +28,7 @@ const SingleBlogPage = async ({ params }) => {
           alt={blogDetails.blog_title}
           width={500}
           height={300}
-          className="w-full h-[400px] mt-5"
+          className="w-full h-60 md:h-[400px] mt-5"
           sizes=""
         />
       )}
