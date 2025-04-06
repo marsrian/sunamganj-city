@@ -87,7 +87,9 @@ const ProfileForm = ({ userData }) => {
         image: payload.image,
       });
       form.reset();
-      router.refresh();
+      setTimeout(() => {
+        router.refresh();
+      }, 1000);
     } catch (error) {
       toast.error("Failed to update profile. Please try again.");
       console.error(error);
