@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useState } from "react";
-import { FaAlignLeft, FaFacebookF, FaTimes } from "react-icons/fa";
+import { FaAlignLeft, FaEnvelope, FaFacebook, FaFacebookF, FaTimes } from "react-icons/fa";
 import { signOut, useSession } from "next-auth/react";
 import { ModeToggle } from "./ModeToggle";
 import {
@@ -47,15 +47,23 @@ const Navbar = () => {
           <h5>Welcome to Sunamganj City</h5>
           <div className="flex justify-between gap-2 md:gap-5">
             <p>{formattedDate}</p>
-            <button className="">
+            <div className="flex items-center gap-2 md:gap-3">
               <Link
                 href="https://www.facebook.com/share/g/14ULfvzS6e/"
                 target="_blank"
                 className="flex items-center gap-1"
+                title="সুনামগঞ্জ হেল্পলাইন"
               >
-                <FaFacebookF /> Sunamganj_HelpLine
+                <FaFacebook className="text-xl" />
               </Link>
-            </button>
+              {/* <Link
+                href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#sent?compose=new"
+                target="_blank"
+                className="flex items-center gap-1"
+              >
+                <FaEnvelope />
+              </Link> */}
+            </div>
           </div>
         </div>
       </div>
