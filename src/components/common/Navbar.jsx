@@ -1,7 +1,13 @@
 "use client";
 import Link from "next/link";
 import React, { useState } from "react";
-import { FaAlignLeft, FaEnvelope, FaFacebook, FaFacebookF, FaTimes } from "react-icons/fa";
+import {
+  FaAlignLeft,
+  FaEnvelope,
+  FaFacebook,
+  FaFacebookF,
+  FaTimes,
+} from "react-icons/fa";
 import { signOut, useSession } from "next-auth/react";
 import { ModeToggle } from "./ModeToggle";
 import {
@@ -18,6 +24,7 @@ import Image from "next/image";
 const Navbar = () => {
   const { data: session, status } = useSession();
   const [isOpen, setIsOpen] = useState(true);
+  const [selectedValue, setSelectedValue] = useState("");
   const router = useRouter();
   const pathname = usePathname();
   const handleToggle = () => {
@@ -30,6 +37,7 @@ const Navbar = () => {
     } else if (value === "logout") {
       signOut();
     }
+    setSelectedValue("");
   };
 
   // Today Date:
@@ -56,13 +64,6 @@ const Navbar = () => {
               >
                 <FaFacebook className="text-xl" />
               </Link>
-              {/* <Link
-                href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#sent?compose=new"
-                target="_blank"
-                className="flex items-center gap-1"
-              >
-                <FaEnvelope />
-              </Link> */}
             </div>
           </div>
         </div>
@@ -128,7 +129,13 @@ const Navbar = () => {
           )}
 
           {status == "authenticated" ? (
-            <Select onValueChange={handleSelect}>
+            <Select
+              value={selectedValue}
+              onValueChange={(value) => {
+                setSelectedValue(value);
+                handleSelect(value);
+              }}
+            >
               <SelectTrigger className="w-[180px] gap-2">
                 <div className="flex items-center gap-2">
                   {session?.user?.image ? (
@@ -139,7 +146,7 @@ const Navbar = () => {
                       alt="Profile"
                       className="w-6 h-6 rounded-full"
                     />
-                  ): (
+                  ) : (
                     <Image
                       src="/assets/profile.png"
                       width={24}
@@ -173,7 +180,13 @@ const Navbar = () => {
         </ul>
         <div className="flex gap-2 md:hidden">
           {status == "authenticated" && (
-            <Select onValueChange={handleSelect}>
+            <Select
+              value={selectedValue}
+              onValueChange={(value) => {
+                setSelectedValue(value);
+                handleSelect(value);
+              }}
+            >
               <SelectTrigger className="w-20 gap-2">
                 <div className="flex items-center gap-2">
                   {session?.user?.image ? (
@@ -212,7 +225,7 @@ const Navbar = () => {
           </button>
 
           <div
-            className={`absolute top-20 left-0 w-80 h-screen bg-gray-900 text-white bg-opacity-80 z-10 transition-all duration-300 ease-in-out ${
+            className={`absolute top-20 left-0 w-60 h-screen bg-gray-900 text-white bg-opacity-80 z-10 transition-all duration-300 ease-in-out ${
               isOpen
                 ? "-translate-x-full opacity-0"
                 : "translate-x-0 opacity-100"

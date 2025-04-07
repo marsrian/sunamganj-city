@@ -29,7 +29,7 @@ const SingleBlogPage = async ({ params }) => {
   return (
     <>
       <ScrollToTop />
-      <div className="max-w-7xl mx-auto px-4 m:px-0 mt-5">
+      <div className="max-w-7xl mx-auto px-4 m:px-0 mt-5 mb-8">
         <h1 className="text-2xl md:text-4xl font-extrabold text-gray-900 dark:text-white">
           {blog_title}
         </h1>
