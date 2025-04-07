@@ -43,7 +43,7 @@ const EventsInfo = async () => {
           )}
 
           <div className="mb-2 p-4 md:p-8">
-            <h3 className="text-2xl font-bold dark:text-black">{event.event_title}</h3>
+            <h3 className="text-xl font-bold dark:text-black">{event.event_title}</h3>
             <p className="flex items-center gap-3 mt-4 dark:text-black">
               <FaMapMarkerAlt className="text-red-800" /> {event.location}
             </p>

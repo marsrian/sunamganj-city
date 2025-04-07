@@ -1,9 +1,11 @@
 "use client";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const ApprovalForm = ({ blogDetails }) => {
   const [approval, setApproval] = useState(blogDetails?.approval);
   const [message, setMessage] = useState(null);
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,6 +23,7 @@ const ApprovalForm = ({ blogDetails }) => {
       
       if (res.ok) {
         setMessage("Status updated successfully!");
+        router.push("/dashboard/blogs/approval_blog");
       } else {
         setMessage("Update failed: " + (data.message || "Unknown error"));
       }
