@@ -1,10 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useState } from "react";
-import {
-  FaAlignLeft,
-  FaTimes,
-} from "react-icons/fa";
+import { FaAlignLeft, FaTimes } from "react-icons/fa";
 import { signOut, useSession } from "next-auth/react";
 import { ModeToggle } from "./ModeToggle";
 import {
@@ -52,16 +49,6 @@ const Navbar = () => {
           <h5>Welcome to Sunamganj City</h5>
           <div className="flex justify-between gap-2 md:gap-5">
             <p>{formattedDate}</p>
-            {/* <div className="flex items-center gap-2 md:gap-3">
-              <Link
-                href="https://www.facebook.com/share/g/14ULfvzS6e/"
-                target="_blank"
-                className="flex items-center gap-1"
-                title="সুনামগঞ্জ হেল্পলাইন"
-              >
-                <FaFacebook className="text-xl" />
-              </Link>
-            </div> */}
           </div>
         </div>
       </div>
@@ -106,7 +93,7 @@ const Navbar = () => {
           >
             <li>Helpline</li>
           </Link>
-          {session?.user?.role === "admin" ? (
+          {session?.user?.role === "admin" && (
             <Link
               href="/dashboard/members"
               className={
@@ -117,7 +104,8 @@ const Navbar = () => {
             >
               <li>Dashboard</li>
             </Link>
-          ) : session?.user?.role === "writer" ? (
+          )}
+          {session?.user?.role === "writer" && (
             <Link
               href="/dashboard/blogs/all_blog"
               className={
@@ -128,7 +116,8 @@ const Navbar = () => {
             >
               <li>Dashboard</li>
             </Link>
-          ) : (
+          )}
+          {session?.user?.role === "manager" && (
             <Link
               href="/dashboard/events/all_event"
               className={

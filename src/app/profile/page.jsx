@@ -42,6 +42,7 @@ const ProfilePage = async () => {
         />
         <h1 className="text-3xl font-bold">{userData.name}</h1>
         <p>Email: {userData.email}</p>
+        <p>Role: {userData?.role}</p>
       </div>
       <ProfileForm userData={userData} />
     </div>
