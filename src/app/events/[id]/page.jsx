@@ -22,12 +22,12 @@ const SingleEventDetailsPage = async ({ params }) => {
   return (
     <>
       <ScrollToTop />
-      <div className="max-w-7xl mx-auto px-4 m:px-0 mt- mb-6 md:mb-8">
+      <div className="max-w-7xl mx-auto px-4 m:px-0 mt-4 md:mt-6 mb-6 md:mb-8">
         <h1 className="text-2xl md:text-4xl font-extrabold text-gray-900 dark:text-white">
           {eventDetails.event_title}
         </h1>
         {eventDetails.event_status === "closed" ? (
-          <p className="bg-amber-200 flex items-center gap-2 py-3 px-5 rounded-sm mt-5 text-red-500">
+          <p className="bg-amber-200 flex items-center gap-2 py-3 px-5 rounded-sm mt-5 md:mt-6 text-red-500">
             <FaRegWindowClose className="text-red-400" />
             {eventDetails?.event_status}
           </p>
