@@ -14,12 +14,12 @@ const SignUpPage = () => {
         alt="login"
         className="rounded-[10px] md:h-[650px]"
       />
-      <div className="p-4 border border-[#D0D0D0] rounded-[10px] w-full md:w-[611px]">
-        <h1 className="text-[#444] text-center text-xl font-semibold">
+      <div className="p-4 border border-[#D0D0D0] rounded-[10px] w-full md:w-[500px]">
+        <h1 className="text-[#444] dark:text-white text-center text-xl font-semibold">
           Sign Up
         </h1>
         <RegisterForm />
-        <p className="text-[#444] text-center font-medium mt-4">
+        <p className="text-[#444] dark:text-white text-center font-medium mt-4">
           Or Sign Up with
         </p>
         <SocialLogin />

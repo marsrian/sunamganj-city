@@ -13,12 +13,12 @@ const SingleUserInfoPage = async ({params}) => {
     <div className="flex flex-col md:flex-row items-center justify-center gap-16 mt-6">
       <Image
         src="/assets/niladri.webp"
-        width={500}
-        height={500}
+        width={400}
+        height={400}
         alt="login"
-        className="rounded-[10px] md:h-[520px]"
+        className="rounded-[10px] md:h-[450px]"
       />
-      <div className="p-4 border border-[#D0D0D0] rounded-[10px] w-full md:w-[611px]">
+      <div className="p-4 border border-[#D0D0D0] rounded-[10px] w-full md:w-[400px]">
         <h1 className="text-[#444] text-center text-2xl font-semibold">
           Update Role
         </h1>

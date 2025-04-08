@@ -204,12 +204,12 @@ const EventForm = () => {
         htmlFor="location"
         className="text-[#444] dark:text-white font-semibold mt-6"
       >
-        News Location
+        Event Location
       </label>
       <input
         type="text"
         name="location"
-        placeholder="News Location"
+        placeholder="Event Location"
         className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-4 px-6 mt-3"
       />
 

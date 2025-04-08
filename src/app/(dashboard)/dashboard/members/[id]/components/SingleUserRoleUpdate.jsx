@@ -33,26 +33,26 @@ const SingleUserRoleUpdate = ({ data }) => {
     }
   };
   return (
-    <form onSubmit={handleUpdateUserRole} className="flex flex-col mt-5">
+    <form onSubmit={handleUpdateUserRole} className="flex flex-col">
       <label htmlFor="Name" className="text-[#444] font-semibold mt-6">
-        Name
+        Name <span className="text-gray-500 text-xs">(Read only)</span>
       </label>
       <input
         defaultValue={data.name}
         readOnly
         type="text"
         name="name"
-        className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-3 px-6 mt-3"
+        className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-3 px-6 mt-1"
       />
       <label htmlFor="Email" className="text-[#444] font-semibold mt-4">
-        Email
+        Email <span className="text-gray-500 text-xs">(Read only)</span>
       </label>
       <input
         defaultValue={data.email}
         readOnly
         type="email"
         name="email"
-        className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-3 px-6 mt-3"
+        className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-3 px-6 mt-1"
       />
       <label htmlFor="Role" className="text-[#444] font-semibold mt-4">
         Role
@@ -62,7 +62,7 @@ const SingleUserRoleUpdate = ({ data }) => {
         type="text"
         name="role"
         placeholder="Role"
-        className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-3 px-6 mt-3"
+        className="text-[#A2A2A2] leading-7 border border-[#E8E8E8] rounded-[10px] py-3 px-6 mt-1"
       />
       <input
         type="submit"

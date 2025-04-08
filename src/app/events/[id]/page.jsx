@@ -22,7 +22,7 @@ const SingleEventDetailsPage = async ({ params }) => {
   return (
     <>
       <ScrollToTop />
-      <div className="max-w-7xl mx-auto px-4 m:px-0 mt-4">
+      <div className="max-w-7xl mx-auto px-4 m:px-0 mt- mb-6 md:mb-8">
         <h1 className="text-2xl md:text-4xl font-extrabold text-gray-900 dark:text-white">
           {eventDetails.event_title}
         </h1>

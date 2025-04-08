@@ -27,7 +27,7 @@ const ProfilePage = async () => {
   const userData = await getUserData();
 
   if (!userData) {
-    return <div>Error loading profile</div>;
+    return <div className="text-center mt-20 text-red-500">Error loading profile. Login first</div>;
   }
 
   return (

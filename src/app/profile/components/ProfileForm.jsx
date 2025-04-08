@@ -98,10 +98,10 @@ const ProfileForm = ({ userData }) => {
     }
   };
   return (
-    <form onSubmit={handleUserForm} className="flex flex-col">
+    <form onSubmit={handleUserForm} className="flex flex-col mt-6 md:mt-0">
       <label
         htmlFor="name"
-        className="text-[#444] dark:text-white font-semibold mt-6"
+        className="text-[#444] dark:text-white font-semibold"
       >
         Profile Name
       </label>
@@ -116,7 +116,7 @@ const ProfileForm = ({ userData }) => {
         htmlFor="email"
         className="text-[#444] dark:text-white font-semibold mt-4"
       >
-        Email <span className="text-gray-500">(Read only)</span>
+        Email <span className="text-gray-500 text-xs">(Read only)</span>
       </label>
       <input
         defaultValue={userData?.email}

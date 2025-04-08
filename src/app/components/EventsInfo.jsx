@@ -19,7 +19,7 @@ const EventsInfo = async () => {
       {events.filter((event) => event.approval === "approved").map((event) => (
         <div
           key={event._id}
-          className="flex flex-col rounded-lg shadow-lg border bg-white hover:shadow-xl transition-shadow duration-300"
+          className="flex flex-col rounded-lg shadow-md border bg-white hover:shadow-lg transition-shadow duration-300"
         >
           {event?.image && (
             <div className="relative h-60 w-full">

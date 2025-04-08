@@ -16,7 +16,7 @@ const Sidebar = () => {
             <Link
               href="/dashboard/members"
               className={
-                pathname === "/dashboard/members" ? "text-green-600" : ""
+                pathname.includes("/dashboard/members") ? "text-green-600" : ""
               }
             >
               Members
@@ -38,7 +38,7 @@ const Sidebar = () => {
             <Link
               href="/dashboard/services/services_all"
               className={
-                pathname === "/dashboard/services/services_all"
+                pathname.includes("/dashboard/services/services_all")
                   ? "text-green-600"
                   : ""
               }
@@ -50,7 +50,7 @@ const Sidebar = () => {
             <Link
               href="/dashboard/services/approval_service"
               className={
-                pathname === "/dashboard/services/approval_service"
+                pathname.includes("/dashboard/services/approval_service")
                   ? "text-green-600"
                   : ""
               }
@@ -62,7 +62,7 @@ const Sidebar = () => {
             <Link
               href="/dashboard/events/approval_event"
               className={
-                pathname === "/dashboard/events/approval_event"
+                pathname.includes("/dashboard/events/approval_event")
                   ? "text-green-600"
                   : ""
               }
@@ -74,7 +74,7 @@ const Sidebar = () => {
             <Link
               href="/dashboard/blogs/approval_blog"
               className={
-                pathname === "/dashboard/blogs/approval_blog"
+                pathname.includes("/dashboard/blogs/approval_blog")
                   ? "text-green-600"
                   : ""
               }
@@ -90,7 +90,7 @@ const Sidebar = () => {
             <Link
               href="/dashboard/events/all_event"
               className={
-                pathname === "/dashboard/events/all_event"
+                pathname.includes("/dashboard/events/all_event")
                   ? "text-green-600"
                   : ""
               }
@@ -128,7 +128,7 @@ const Sidebar = () => {
             <Link
               href="/dashboard/blogs/all_blog"
               className={
-                pathname === "/dashboard/blogs/all_blog" ? "text-green-600" : ""
+                pathname.includes("/dashboard/blogs/all_blog") ? "text-green-600" : ""
               }
             >
               Show All Blog

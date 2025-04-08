@@ -3,9 +3,6 @@ import Link from "next/link";
 import React, { useState } from "react";
 import {
   FaAlignLeft,
-  FaEnvelope,
-  FaFacebook,
-  FaFacebookF,
   FaTimes,
 } from "react-icons/fa";
 import { signOut, useSession } from "next-auth/react";
@@ -55,7 +52,7 @@ const Navbar = () => {
           <h5>Welcome to Sunamganj City</h5>
           <div className="flex justify-between gap-2 md:gap-5">
             <p>{formattedDate}</p>
-            <div className="flex items-center gap-2 md:gap-3">
+            {/* <div className="flex items-center gap-2 md:gap-3">
               <Link
                 href="https://www.facebook.com/share/g/14ULfvzS6e/"
                 target="_blank"
@@ -64,7 +61,7 @@ const Navbar = () => {
               >
                 <FaFacebook className="text-xl" />
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -78,6 +75,22 @@ const Navbar = () => {
             className={pathname === "/" ? "text-green-600 font-medium" : ""}
           >
             <li>Home</li>
+          </Link>
+          <Link
+            href="/services"
+            className={
+              pathname === "/services" ? "text-green-600 font-medium" : ""
+            }
+          >
+            <li>Service</li>
+          </Link>
+          <Link
+            href="/events"
+            className={
+              pathname === "/events" ? "text-green-600 font-medium" : ""
+            }
+          >
+            <li>Event</li>
           </Link>
           <Link
             href="/blog"
@@ -241,6 +254,24 @@ const Navbar = () => {
                     }
                   >
                     <li>Home</li>
+                  </Link>
+                  <Link
+                    href="/services"
+                    className={
+                      pathname === "/services"
+                        ? "text-green-600 font-medium"
+                        : ""
+                    }
+                  >
+                    <li>Service</li>
+                  </Link>
+                  <Link
+                    href="/events"
+                    className={
+                      pathname === "/events" ? "text-green-600 font-medium" : ""
+                    }
+                  >
+                    <li>Event</li>
                   </Link>
                   <Link
                     href="/blog"

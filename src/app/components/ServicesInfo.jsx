@@ -21,7 +21,7 @@ const ServicesInfo = async () => {
       {services.filter((service) => service.approval === "approved").map((service) => (
         <div
           key={service._id}
-          className="flex flex-col rounded-lg shadow-lg p-4 border bg-white hover:shadow-xl transition-shadow duration-300"
+          className="flex flex-col rounded-lg shadow-md p-4 border bg-white hover:shadow-lg transition-shadow duration-300"
         >
           {service?.image && (
             <div className="mb-4 relative h-48 w-full">

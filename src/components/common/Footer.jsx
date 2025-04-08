@@ -23,18 +23,18 @@ const Footer = () => {
           <h4 className="font-medium text-lg mt-4 md:mt-0">Important Links</h4>
           <ul className="mt-3 flex flex-col gap-2 md:gap-3">
             <li>
-              <Link href="/" className="hover:text-gray-400">
-                Home
+              <Link href="/services" className="hover:text-gray-400">
+                Service
+              </Link>
+            </li>
+            <li>
+              <Link href="/events" className="hover:text-gray-400">
+                Events
               </Link>
             </li>
             <li>
               <Link href="/blog" className="hover:text-gray-400">
                 Blog
-              </Link>
-            </li>
-            <li>
-              <Link href="/blog" className="hover:text-gray-400">
-                Events
               </Link>
             </li>
             <li>
