@@ -41,7 +41,7 @@ const SingleBlogPage = async ({ params }) => {
             alt={writer_name}
             className="w-10 h-10 rounded-full"
           />
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+          <p className="text-sm text-gray-500 dark:text-gray-400">
             {writer_name}{" "}
           </p>
         </div>

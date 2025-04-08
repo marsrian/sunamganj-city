@@ -52,10 +52,21 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <nav className="flex justify-between items-center px-3 md:px-8  py-3 border-b">
-        <h3 className="text-2xl md:text-3xl font-bold text-green-800">
-          Sunamganj City
-        </h3>
+      <nav className="flex justify-between items-center px-3 md:px-8 py-2 md:py-1 border-b">
+        <div className="flex items-center space-x-1">
+          <Link href="/">
+            <Image
+              src="/assets/logo.png"
+              width={60}
+              height={60}
+              alt="logo"
+              className="w-12 h-12 md:w-14 md:h-14 md:mt-1"
+            />
+          </Link>
+          <h3 className="hidden md:block text-2xl md:text-3xl font-bold text-green-800">
+            Sunamganj City
+          </h3>
+        </div>
         <ul className="hidden md:flex items-center justify-between space-x-8">
           <Link
             href="/"

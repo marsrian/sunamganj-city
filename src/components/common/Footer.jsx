@@ -13,12 +13,24 @@ const Footer = () => {
   return (
     <div className="p-12 lg:py-16 lg:px-20 bg-gray-900 text-white">
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div className="">
-          <h4 className="font-bold text-2xl">
-            <Link href="/">Sunamganj City</Link>
-          </h4>
-          <p className="mt-3">Sunamganj, Bangladesh</p>
+        <div className="flex -ml-3 md:ml-0">
+          <Link href="/">
+            <Image
+              src="/assets/logo_white.png"
+              width={60}
+              height={60}
+              alt="logo"
+              className="w-16 h-20"
+            />
+          </Link>
+          <div className="">
+            <h3 className="text-2xl md:text-3xl font-bold text-white">
+              Sunamganj City
+            </h3>
+            <p className="mt-1">Sunamganj, Bangladesh</p>
+          </div>
         </div>
+
         <div className="">
           <h4 className="font-medium text-lg mt-4 md:mt-0">Important Links</h4>
           <ul className="mt-3 flex flex-col gap-2 md:gap-3">
