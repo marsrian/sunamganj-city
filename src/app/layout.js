@@ -30,7 +30,7 @@ export const metadata = {
     "Haor bilash sunamganj",
     "Tanguar haor",
     "pahar bilash",
-    "sunamganj badhon"
+    "sunamganj badhon",
   ],
   authors: [
     { name: "Mars Rian", url: "https://afzal-hussain-rian.vercel.app/" },
@@ -50,15 +50,7 @@ export const metadata = {
     url: "https://sunamganj-city.vercel.app",
     siteName: "Sunamganj City",
     type: "website",
-    locale: "en_US",
-    images: [
-      {
-        url: "https://sunamganj-city.vercel.app/og-image.jpg", // You should create and upload this OG image
-        width: 1200,
-        height: 630,
-        alt: "Sunamganj City - Explore Culture, Events and More",
-      },
-    ],
+    local: "en_US",
     icons: {
       icon: ["/favicon.ico?v=4"],
       apple: ["/apple-touch-icon.png?v=4"],
@@ -87,9 +79,7 @@ export default function RootLayout({ children }) {
             disableTransitionOnChange
           >
             <Navbar />
-            <div className="min-h-[calc(100vh-50px)]">
-              {children}
-            </div>
+            <div className="min-h-[calc(100vh-50px)]">{children}</div>
             <Footer />
             <Toaster />
           </ThemeProvider>
