@@ -76,14 +76,15 @@ export const authOptions = {
         token.name = dbUser.name;
         token.image = dbUser.image;
         token.role = dbUser.role;
+        token.email = dbUser?.email
       }
       return token;
     },
     async session({ session, token }) {
       session.user.role = token.role;
-      session.user.name = token.name; // ✅ add this
-      session.user.image = token.image; // ✅ add this
-      session.user.email = token.email; // optional
+      session.user.name = token.name;
+      session.user.image = token.image;
+      session.user.email = token.email;
       return session;
     },
   },
