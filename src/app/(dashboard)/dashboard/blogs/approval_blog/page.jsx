@@ -13,6 +13,12 @@ const fetchServiceInfo = async () => {
   return result;
 };
 
+export const metadata = {
+  title: "Approval Blog",
+  description:
+    "Explore Sunamganj: Culture, festivals, nature, and community updates. Get the latest from this beautiful corner of Sylhet.",
+};
+
 const ApprovalBlogPlage = async () => {
   const data = await fetchServiceInfo();
   return (

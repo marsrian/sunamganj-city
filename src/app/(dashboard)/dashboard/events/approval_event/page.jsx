@@ -9,6 +9,12 @@ const fetchEventInfo = async () =>{
   const result = await res.json();
   return result;
 }
+export const metadata = {
+  title: "Approval Event",
+  description:
+    "Explore Sunamganj: Culture, festivals, nature, and community updates. Get the latest from this beautiful corner of Sylhet.",
+};
+
 
 const ApprovalEventPage = async () => {
     const data = await fetchEventInfo();

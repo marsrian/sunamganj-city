@@ -12,6 +12,12 @@ const fetchBlogInfo = async () =>{
   return result;
 }
 
+export const metadata = {
+  title: "All Blog",
+  description:
+    "Explore Sunamganj: Culture, festivals, nature, and community updates. Get the latest from this beautiful corner of Sylhet.",
+};
+
 const AllBlogPage = async () => {
   const data = await fetchBlogInfo();
   const session = await getServerSession(authOptions);

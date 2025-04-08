@@ -15,6 +15,32 @@ export const getSingleBlog = async (id) => {
   return data;
 };
 
+export const generateMetadata = async ({ params }) => {
+  try {
+    const { id } = params;
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/blogs/${id}`,
+      { headers: new Headers(await headers()) }
+    );
+
+    if (!res.ok) throw new Error("Failed to fetch metadata");
+    
+    const blogData = await res.json();
+
+    return {
+      title: blogData?.blog_title || "Default Title",
+      description: blogData?.description || "Default Description",
+      keywords: blogData?.description?.split(" ") || [],
+    };
+  } catch (error) {
+    console.error("Error generating metadata:", error);
+    return {
+      title: "Fallback Title",
+      description: "Fallback Description",
+    };
+  }
+};
+
 const SingleBlogApprovalPage = async ({ params }) => {
   const id = await params.id;
   const blogDetails = await getSingleBlog(id);

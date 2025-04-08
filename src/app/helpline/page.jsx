@@ -1,6 +1,12 @@
 import Link from "next/link";
 import React from "react";
 
+export const metadata = {
+  title: "Helpline",
+  description:
+    "Explore Sunamganj: Culture, festivals, nature, and community updates. Get the latest from this beautiful corner of Sylhet.",
+};
+
 const HelplinePage = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 md:px-0 mt-5">

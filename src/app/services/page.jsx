@@ -13,6 +13,12 @@ const getServicesData = async () => {
   return res.json();
 };
 
+export const metadata = {
+  title: "Service",
+  description:
+    "Explore Sunamganj: Culture, festivals, nature, and community updates. Get the latest from this beautiful corner of Sylhet.",
+};
+
 const ServicesPage = async () => {
   const services = await getServicesData();
   return (

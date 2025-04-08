@@ -12,6 +12,12 @@ const fetchEventsInfo = async () =>{
   return result;
 }
 
+export const metadata = {
+  title: "All Event",
+  description:
+    "Explore Sunamganj: Culture, festivals, nature, and community updates. Get the latest from this beautiful corner of Sylhet.",
+};
+
 const AllEventInfoPage = async () => {
   const data = await fetchEventsInfo();
   const session = await getServerSession(authOptions);

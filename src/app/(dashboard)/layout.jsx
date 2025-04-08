@@ -1,6 +1,15 @@
 import React from "react";
 import Sidebar from "@/components/common/Sidebar";
 
+export const metadata = {
+  title: {
+    default: "Sunamganj City | Discover Culture, Events & Local Life",
+    template: "%s | Sunamganj City | Discover Culture, Events & Local Life",
+  },
+  description:
+    "Explore Sunamganj: Culture, festivals, nature, and community updates. Get the latest from this beautiful corner of Sylhet.",
+};
+
 const layout = ({ children }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-12">

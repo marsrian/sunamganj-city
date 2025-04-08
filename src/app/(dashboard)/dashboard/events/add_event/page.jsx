@@ -1,6 +1,12 @@
 import EventForm from '@/components/form/EventForm'
 import React from 'react'
 
+export const metadata = {
+  title: "Add Event",
+  description:
+    "Explore Sunamganj: Culture, festivals, nature, and community updates. Get the latest from this beautiful corner of Sylhet.",
+};
+
 const AddNewsPage = () => {
   return (
     <div>

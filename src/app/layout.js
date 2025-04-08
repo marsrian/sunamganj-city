@@ -9,7 +9,7 @@ export const metadata = {
   metadataBase: new URL("https://sunamganj-city.vercel.app"),
   title: {
     default: "Sunamganj City | Discover Culture, Events & Local Life",
-    template: "%s | Sunamganj City",
+    template: "%s | Sunamganj City | Discover Culture, Events & Local Life",
   },
   description:
     "Explore Sunamganj district – your guide to local culture, upcoming events, history, and lifestyle. Stay connected with the heart of Sylhet.",

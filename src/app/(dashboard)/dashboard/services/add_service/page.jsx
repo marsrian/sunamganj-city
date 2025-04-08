@@ -1,6 +1,12 @@
 import React from "react";
 import ServiceForm from "@/components/form/ServiceForm";
 
+export const metadata = {
+  title: "Add Service",
+  description:
+    "Explore Sunamganj: Culture, festivals, nature, and community updates. Get the latest from this beautiful corner of Sylhet.",
+};
+
 const AddServicePage = () => {
   return (
     <div>
