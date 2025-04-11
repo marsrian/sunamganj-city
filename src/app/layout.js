@@ -4,6 +4,7 @@ import { ThemeProvider } from "next-themes";
 import Footer from "@/components/common/Footer";
 import NextAuthProvider from "@/providers/NextAuthProvider";
 import { Toaster } from "react-hot-toast";
+import Script from "next/script";
 
 export const metadata = {
   metadataBase: new URL("https://sunamganj-city.vercel.app"),
@@ -71,6 +72,18 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Google Analytics: */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-8LPQZJY8CW"
+        ></Script>
+        <Script id="google-analytics">
+          {`window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-8LPQZJY8CW');`}
+        </Script>
         {/* Google Search Console: */}
         <meta
           name="google-site-verification"
