@@ -70,6 +70,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Google Search Console: */}
+        <meta
+          name="google-site-verification"
+          content="j_AwOCR1SXdt-QbHMd5RPsHkm5GMcn9DnKf6aAGkxV8"
+        />
+      </head>
       <body>
         <NextAuthProvider>
           <ThemeProvider
