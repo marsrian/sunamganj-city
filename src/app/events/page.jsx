@@ -2,6 +2,8 @@ import { headers } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import * as motion from "motion/react-client";
+import { childVariants, parentVariants } from "@/components/common/Variants";
 
 const getEventData = async () => {
   const res = await fetch(
@@ -28,14 +30,25 @@ const EventPage = async () => {
   const events = await getEventData();
   return (
     <div className="mt-6 mb-6 md:mb-8">
-      <h1 className="text-2xl font-bold text-center underline decoration-double underline-offset-8 ">
-      আমাদের ইভেন্টসমূহ 
-      </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 max-w-7xl mx-auto px-2 md:px-0">
+      <motion.h1
+        initial={{ x: 60 }}
+        animate={{ x: 0 }}
+        transition={{ duration: 1, ease: "easeOut" }}
+        className="text-2xl font-bold text-center underline decoration-double underline-offset-8"
+      >
+        আমাদের ইভেন্টসমূহ
+      </motion.h1>
+      <motion.div
+        variants={parentVariants}
+        initial="hidden"
+        animate="visible"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 max-w-7xl mx-auto px-2 md:px-0"
+      >
         {events
           .filter((event) => event.approval === "approved")
           .map((event) => (
-            <div
+            <motion.div
+            variants={childVariants}
               key={event._id}
               className="flex flex-col rounded-lg shadow-md border bg-white hover:shadow-lg transition-shadow duration-300"
             >
@@ -76,9 +89,9 @@ const EventPage = async () => {
                   </Link>
                 </button>
               </div>
-            </div>
+            </motion.div>
           ))}
-      </div>
+      </motion.div>
     </div>
   );
 };

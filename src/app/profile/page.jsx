@@ -2,6 +2,7 @@ import { headers } from "next/headers";
 import Image from "next/image";
 import React from "react";
 import ProfileForm from "./components/ProfileForm";
+import * as motion from "motion/react-client";
 
 const getUserData = async () => {
   try {
@@ -33,12 +34,21 @@ const ProfilePage = async () => {
   const userData = await getUserData();
 
   if (!userData) {
-    return <div className="text-center mt-20 text-red-500">Error loading profile. Login first</div>;
+    return (
+      <div className="text-center mt-20 text-red-500">
+        Error loading profile. Login first
+      </div>
+    );
   }
 
   return (
     <div className="flex flex-col md:flex-row justify-center gap-4 md:gap-20 max-w-7xl mx-auto px-4 py-8 mt-4">
-      <div className="flex flex-col items-center gap-4">
+      <motion.div
+        initial={{ x: -60 }}
+        animate={{ x: 0 }}
+        transition={{ duration: 1, ease: "easeOut" }}
+        className="flex flex-col items-center gap-4"
+      >
         <Image
           src={userData.image}
           width={200}
@@ -49,8 +59,14 @@ const ProfilePage = async () => {
         <h1 className="text-3xl font-bold">{userData.name}</h1>
         <p>Email: {userData.email}</p>
         <p>Role: {userData?.role}</p>
-      </div>
-      <ProfileForm userData={userData} />
+      </motion.div>
+      <motion.div
+        initial={{ x: 60 }}
+        animate={{ x: 0 }}
+        transition={{ duration: 1, ease: "easeOut" }}
+      >
+        <ProfileForm userData={userData} />
+      </motion.div>
     </div>
   );
 };

@@ -97,12 +97,12 @@ const Navbar = () => {
             <li>Blog</li>
           </Link>
           <Link
-            href="/helpline"
+            href="/contact"
             className={
-              pathname === "/helpline" ? "text-green-600 font-medium" : ""
+              pathname === "/contact" ? "text-green-600 font-medium" : ""
             }
           >
-            <li>Helpline</li>
+            <li>Contact</li>
           </Link>
           {session?.user?.role === "admin" && (
             <Link
@@ -282,16 +282,16 @@ const Navbar = () => {
                     <li>Blog</li>
                   </Link>
                   <Link
-                    href="/helpline"
+                    href="/contact"
                     className={
-                      pathname === "/helpline"
+                      pathname === "/contact"
                         ? "text-green-600 font-medium"
                         : ""
                     }
                   >
-                    <li>Helpline</li>
+                    <li>Contact</li>
                   </Link>
-                  {session?.user?.role === "admin" ? (
+                  {session?.user?.role === "admin" && (
                     <Link
                       href="/dashboard/members"
                       className={
@@ -302,7 +302,8 @@ const Navbar = () => {
                     >
                       <li>Dashboard</li>
                     </Link>
-                  ) : session?.user?.role === "writer" ? (
+                  )}
+                  {session?.user?.role === "writer" && (
                     <Link
                       href="/dashboard/blogs/all_blog"
                       className={
@@ -313,7 +314,8 @@ const Navbar = () => {
                     >
                       <li>Dashboard</li>
                     </Link>
-                  ) : (
+                  )}
+                  {session?.user?.role === "manager" && (
                     <Link
                       href="/dashboard/events/all_event"
                       className={

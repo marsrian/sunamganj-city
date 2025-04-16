@@ -1,6 +1,8 @@
 import { headers } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
+import * as motion from "motion/react-client";
+import { childVariants, parentVariants } from "@/components/common/Variants";
 
 const getServicesData = async () => {
   const res = await fetch(
@@ -23,14 +25,25 @@ const ServicesPage = async () => {
   const services = await getServicesData();
   return (
     <div className="mt-6 mb-6 md:mb-8 max-w-7xl mx-auto px-2 md:px-0">
-      <h1 className="text-2xl font-bold text-center underline decoration-double underline-offset-8 ">
-      আমাদের সেবাসমূহ
-      </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 md:mt-8">
+      <motion.h1
+        initial={{ x: 60 }}
+        animate={{ x: 0 }}
+        transition={{ duration: 1, ease: "easeOut" }}
+        className="text-2xl font-bold text-center underline decoration-double underline-offset-8 "
+      >
+        আমাদের সেবাসমূহ
+      </motion.h1>
+      <motion.div
+        variants={parentVariants}
+        initial="hidden"
+        animate="visible"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 md:mt-8"
+      >
         {services
           .filter((service) => service.approval === "approved")
           .map((service) => (
-            <div
+            <motion.div
+            variants={childVariants}
               key={service._id}
               className="flex flex-col rounded-lg shadow-md p-4 border bg-white hover:shadow-lg transition-shadow duration-300"
             >
@@ -57,9 +70,9 @@ const ServicesPage = async () => {
                   Read More
                 </Link>
               </div>
-            </div>
+            </motion.div>
           ))}
-      </div>
+      </motion.div>
     </div>
   );
 };
