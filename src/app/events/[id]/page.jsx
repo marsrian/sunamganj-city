@@ -18,7 +18,7 @@ export const getSingleEvent = async (id) => {
 
 export const generateMetadata = async ({ params }) => {
   try {
-    const { id } = params;
+    const { id } = await params;
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/events/${id}`,
       { headers: new Headers(await headers()) }
@@ -43,7 +43,8 @@ export const generateMetadata = async ({ params }) => {
 };
 
 const SingleEventDetailsPage = async ({ params }) => {
-  const id = await params.id;
+  const p = await params;
+  const id = p.id;
   const eventDetails = await getSingleEvent(id);
   return (
     <>

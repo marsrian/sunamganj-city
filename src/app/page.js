@@ -11,9 +11,9 @@ const HomePage = () => {
       {/* Services Section: */}
       <section className="mt-8 max-w-7xl mx-auto px-2 md:px-0">
         <motion.h1
-          initial={{ x: 60 }}
-          whileInView={{ x: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
+          // initial={{ x: 60 }}
+          // whileInView={{ x: 0 }}
+          // transition={{ duration: 1, ease: "easeOut" }}
           className="text-center font-semibold text-xl md:text-3xl leading-[55px] underline underline-offset-8 decoration-double"
         >
           আমাদের সেবাসমূহ
@@ -23,9 +23,9 @@ const HomePage = () => {
       {/* Events Section: */}
       <section className="mt-12 md:mt-16 max-w-7xl mx-auto px-2 md:px-0 mb-8">
         <motion.h1
-          initial={{ x: 60 }}
-          whileInView={{ x: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
+          // initial={{ x: 60 }}
+          // whileInView={{ x: 0 }}
+          // transition={{ duration: 1, ease: "easeOut" }}
           className="text-center font-semibold text-xl md:text-3xl leading-[55px] underline underline-offset-8 decoration-double"
         >
           আসন্ন ইভেন্ট সমূহ

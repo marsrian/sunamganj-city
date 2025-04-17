@@ -17,14 +17,12 @@ export const getSingleService = async (id) => {
 
 export const generateMetadata = async ({ params }) => {
   try {
-    const { id } = params;
+    const { id } = await params;
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/services/${id}`,
       { headers: new Headers(await headers()) }
     );
 
-    if (!res.ok) throw new Error("Failed to fetch metadata");
-    
     const serviceData = await res.json();
 
     return {
@@ -62,7 +60,7 @@ const page = async ({ params }) => {
           />
         )}
         {serviceDetails.description && (
-          <div className="prose prose-sm max-w-none text-gray-600 dark:text-white mt-5">
+          <div className="prose prose-sm max-w-none dark:text-white mt-5">
             <SanitizedContent html={serviceDetails.description} />
           </div>
         )}
