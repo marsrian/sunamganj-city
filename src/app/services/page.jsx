@@ -21,17 +21,32 @@ export const metadata = {
     "Explore Sunamganj: Culture, festivals, nature, and community updates. Get the latest from this beautiful corner of Sylhet.",
 };
 
+const serviceTitle = "আমাদের সেবাসমূহ";
+
+const staggerVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
+
 const ServicesPage = async () => {
   const services = await getServicesData();
   return (
     <div className="mt-6 mb-6 md:mb-8 max-w-7xl mx-auto px-2 md:px-0">
       <motion.h1
-        initial={{ x: 60 }}
-        animate={{ x: 0 }}
-        transition={{ duration: 1, ease: "easeOut" }}
+        initial="hidden"
+        animate="visible"
+        variants={{
+          visible: {
+            transition: { staggerChildren: 0.1 },
+          },
+        }}
         className="text-2xl font-bold text-center underline decoration-double underline-offset-8 "
       >
-        আমাদের সেবাসমূহ
+        {serviceTitle.split("").map((char, index) => (
+          <motion.span key={index} variants={staggerVariants}>
+            {char}
+          </motion.span>
+        ))}
       </motion.h1>
       <motion.div
         variants={parentVariants}
@@ -43,7 +58,7 @@ const ServicesPage = async () => {
           .filter((service) => service.approval === "approved")
           .map((service) => (
             <motion.div
-            variants={childVariants}
+              variants={childVariants}
               key={service._id}
               className="flex flex-col rounded-lg shadow-md p-4 border bg-white hover:shadow-lg transition-shadow duration-300"
             >

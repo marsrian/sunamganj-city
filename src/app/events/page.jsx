@@ -26,29 +26,48 @@ export const metadata = {
     "Explore Sunamganj: Culture, festivals, nature, and community updates. Get the latest from this beautiful corner of Sylhet.",
 };
 
+const eventTitle = "আসন্ন ইভেন্ট সমূহ";
+
+const staggerVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
+
 const EventPage = async () => {
   const events = await getEventData();
   return (
     <div className="mt-6 mb-6 md:mb-8">
       <motion.h1
-        initial={{ x: 60 }}
-        animate={{ x: 0 }}
-        transition={{ duration: 1, ease: "easeOut" }}
-        className="text-2xl font-bold text-center underline decoration-double underline-offset-8"
-      >
-        আমাদের ইভেন্টসমূহ
-      </motion.h1>
-      <motion.div
-        variants={parentVariants}
         initial="hidden"
         animate="visible"
+        variants={{
+          visible: {
+            transition: { staggerChildren: 0.1 },
+          },
+        }}
+        className="text-2xl font-bold text-center underline decoration-double underline-offset-8"
+      >
+        {eventTitle.split("").map((char, index) => (
+          <motion.span key={index} variants={staggerVariants}>
+            {char}
+          </motion.span>
+        ))}
+      </motion.h1>
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={{
+          visible: {
+            transition: { staggerChildren: 0.1 },
+          },
+        }}
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 max-w-7xl mx-auto px-2 md:px-0"
       >
         {events
           .filter((event) => event.approval === "approved")
           .map((event) => (
             <motion.div
-            variants={childVariants}
+              variants={childVariants}
               key={event._id}
               className="flex flex-col rounded-lg shadow-md border bg-white hover:shadow-lg transition-shadow duration-300"
             >

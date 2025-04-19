@@ -8,16 +8,31 @@ export const metadata = {
     "Explore Sunamganj: Culture, festivals, nature, and community updates. Get the latest from this beautiful corner of Sylhet.",
 };
 
+const contactTitle = "Contact";
+
+const staggerVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
+
 const HelplinePage = () => {
   return (
     <div className="max-w-7xl mx-auto px-8 md:px-0 mt-5">
       <motion.h1
-        initial={{ x: 60 }}
-        animate={{ x: 0 }}
-        transition={{ duration: 1, ease: "easeOut" }}
+        initial="hidden"
+        animate="visible"
+        variants={{
+          visible: {
+            transition: { staggerChildren: 0.1 },
+          },
+        }}
         className="text-2xl font-medium text-center underline decoration-double underline-offset-8 "
       >
-        Contact
+        {contactTitle.split("").map((char, index) => (
+          <motion.span key={index} variants={staggerVariants}>
+            {char}
+          </motion.span>
+        ))}
       </motion.h1>
       <p className="mt-8 text-lg">
         <span className="font-medium">Facebook:</span>{" "}

@@ -16,6 +16,13 @@ const getBlogData = async () => {
   return data;
 };
 
+const blogTitle = "সুনামগঞ্জ সম্পর্কিত ব্লগসমূহ ";
+
+const staggerVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
+
 export const metadata = {
   title: "Blog",
   description:
@@ -27,12 +34,20 @@ const BlogPage = async () => {
   return (
     <div className="mt-6 mb-6 md:mb-8">
       <motion.h1
-        initial={{ x: 60 }}
-        animate={{ x: 0 }}
-        transition={{ duration: 1, ease: "easeOut" }}
+        initial="hidden"
+        animate="visible"
+        variants={{
+          visible: {
+            transition: { staggerChildren: 0.1 },
+          },
+        }}
         className="text-2xl font-bold text-center underline decoration-double underline-offset-8 "
       >
-        All Blog
+        {blogTitle.split("").map((char, index) => (
+          <motion.span key={index} variants={staggerVariants}>
+            {char}
+          </motion.span>
+        ))}
       </motion.h1>
       <motion.div
         variants={parentVariants}
