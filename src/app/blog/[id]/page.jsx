@@ -1,5 +1,10 @@
 import SanitizedContent from "@/app/components/SanitizedContent";
 import ScrollToTop from "@/components/common/ScrollToTop";
+import CommentForm from "@/components/form/CommentForm";
+import CommentsList from "@/components/form/CommentsList";
+import SignInPrompt from "@/components/form/SignInPrompt";
+import { authOptions } from "@/lib/authOptions";
+import { getServerSession } from "next-auth";
 import { headers } from "next/headers";
 import Image from "next/image";
 import React from "react";
@@ -15,6 +20,19 @@ export const getSingleBlog = async (id) => {
   return data;
 };
 
+// Test Comment Start
+export const getComments = async (blogId) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/comments?blogId=${blogId}`,
+    {
+      headers: new Headers(await headers()),
+    }
+  );
+  const data = await res.json();
+  return data;
+};
+// Test Comment End
+
 export const generateMetadata = async ({ params }) => {
   try {
     const { id } = params;
@@ -24,7 +42,7 @@ export const generateMetadata = async ({ params }) => {
     );
 
     if (!res.ok) throw new Error("Failed to fetch metadata");
-    
+
     const blogData = await res.json();
 
     return {
@@ -44,14 +62,10 @@ export const generateMetadata = async ({ params }) => {
 const SingleBlogPage = async ({ params }) => {
   const id = await params.id;
   const blogDetails = await getSingleBlog(id);
-  const {
-    writer_name,
-    writer_image,
-    writer_email,
-    image,
-    description,
-    blog_title,
-  } = blogDetails;
+  const comments = await getComments(id);
+  const session = await getServerSession(authOptions);
+  const { writer_name, writer_image, image, description, blog_title } =
+    blogDetails;
   return (
     <>
       <ScrollToTop />
@@ -86,6 +100,16 @@ const SingleBlogPage = async ({ params }) => {
             <SanitizedContent html={description} />
           </div>
         )}
+        {/* Comment Section */}
+        <div className="mt-12 border-t pt-8">
+          <h2 className="text-xl font-bold mb-6">
+            Comments ({comments.length})
+          </h2>
+
+          {session ? <CommentForm blogId={id} /> : <SignInPrompt />}
+
+          <CommentsList comments={comments} />
+        </div>
       </div>
     </>
   );
