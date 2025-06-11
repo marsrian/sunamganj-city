@@ -25,13 +25,7 @@ export default function sitemap() {
         priority: 0.8,
       },
       {
-        url: "https://sunamganj-city.vercel.app/helpline",
-        lastModified: new Date(),
-        changeFrequency: "monthly",
-        priority: 0.8,
-      },
-      {
-        url: "https://marsflix-bd.vercel.app/hollywood-movie",
+        url: "https://sunamganj-city.vercel.app/contact",
         lastModified: new Date(),
         changeFrequency: "monthly",
         priority: 0.8,
