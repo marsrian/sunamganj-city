@@ -120,4 +120,7 @@
   body {
     @apply bg-background text-foreground;
   }
+  .contentDesign li {
+    @apply list-disc marker:text-blue-400 ml-4
+  }
 }

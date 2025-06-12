@@ -66,11 +66,12 @@ const SingleBlogPage = async ({ params }) => {
   const session = await getServerSession(authOptions);
   const { writer_name, writer_image, image, description, blog_title } =
     blogDetails;
+
   return (
     <>
       <ScrollToTop />
-      <div className="max-w-7xl mx-auto px-4 m:px-0 mt-5 mb-8">
-        <h1 className="text-2xl md:text-4xl font-extrabold text-gray-900 dark:text-white">
+      <div className="max-w-7xl mx-auto px-2 m:px-0 mt-5 mb-8">
+        <h1 className="text-2xl md:text-4xl font-extrabold text-gray-900 dark:text-white leading-8">
           {blog_title}
         </h1>
         <div className="flex items-center gap-2 mt-3 md:mt-5">
@@ -82,7 +83,7 @@ const SingleBlogPage = async ({ params }) => {
             className="w-10 h-10 rounded-full"
           />
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            {writer_name}{" "}
+            {writer_name}
           </p>
         </div>
         {image && (
@@ -90,9 +91,9 @@ const SingleBlogPage = async ({ params }) => {
             src={image}
             alt={blog_title}
             width={500}
-            height={300}
-            className="w-full h-60 md:h-[400px] mt-5"
-            sizes=""
+            height={500}
+            className="w-full h-60 md:h-[400px] mt-5 shadow-md border p-1"
+            priority
           />
         )}
         {description && (
@@ -100,13 +101,13 @@ const SingleBlogPage = async ({ params }) => {
             <SanitizedContent html={description} />
           </div>
         )}
-        {/* Comment Section */}
+
         <div className="mt-12 border-t pt-8">
           <h2 className="text-xl font-bold mb-6">
             Comments ({comments.length})
           </h2>
 
-          {session ? <CommentForm blogId={id} /> : <SignInPrompt />}
+          {session ? <CommentForm blogId={blogDetails._id} /> : <SignInPrompt />}
 
           <CommentsList comments={comments} />
         </div>

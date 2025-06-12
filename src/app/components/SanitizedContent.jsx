@@ -13,7 +13,7 @@ const SanitizedContent = ({ html }) => {
   if (!isMounted) return null;
 
   const cleanHTML = DOMPurify.sanitize(html);
-  return <div  dangerouslySetInnerHTML={{ __html: cleanHTML }} />;
+  return <div className="contentDesign"  dangerouslySetInnerHTML={{ __html: cleanHTML }} />;
 };
 
 export default SanitizedContent;

@@ -2,9 +2,9 @@ import React from "react";
 
 const BlogLayout = ({children}) => {
   return (
-    <div className="max-w-7xl mx-auto px-4 m:px-0 mt-5 mb-8 grid grid-cols-1 md:grid-cols-6 gap-4 p-4">
+    <div className="max-w-7xl mx-auto px-2 m:px-0 mt-5 mb-8 grid grid-cols-1 md:grid-cols-6 gap-4 p-4">
       <div className="col-span-4">
-        <div className="bg-white dark:bg-gray-800">
+        <div className="">
           {children}
         </div>
       </div>
